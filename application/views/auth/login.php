@@ -1,4 +1,4 @@
-<div class="container-fluid mt-5">
+<div class="container-fluid">
 
   <?= $this->session->flashdata('message'); ?>
   
@@ -9,12 +9,17 @@
       <div class="row">
         <!-- untuk logo -->
         <div class="col image rounded-left">
-          <div class="hero-image">
+          <div class="text-center">
+            <img src="<?= base_url('assets/images/accessoris/hero.png')?>" class="hero-image" alt="...">
           </div>
         </div>
+        <!-- logo end -->
 
         <!-- untuk login -->
-        <div class="col">
+        <div class="col-5 p-5">
+          <h5 class="">Hallo !</h5>
+          <h5 class="font-weight-bold mb-5">Good Morning</h5>
+          <h6 class="login-box-msg font-weight-bold"><span>Login</span> Your account</h6>
           <form action="<?= base_url('auth') ?>" method="post">
             <div class="input-group">
               <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?= set_value('email'); ?>">
@@ -34,21 +39,17 @@
               </div>
             </div>
             <?= form_error('password', '<small class="text-danger pl-1">', '</small>') ?>
-            <div class="row mt-3">
-              <div class="col-lg">
-                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <!-- end form login -->
+            <p class="mt-4">
+              <a href="<?= base_url('auth/registrasi')?>" class="d-flex justify-content-end"><small>Forgot password ?</small></a>
+            </p> 
+            <div class="row d-flex justify-content-center">
+              <div class="col-10">
+                <button type="submit" class="btn sign btn-block">Sign In</button>
               </div>
             </div>
           </form>
-
-          <hr>
-    
-          <p class="mb-0">
-            <a href="<?= base_url('auth/registrasi')?>" class="text-center"><small>Daftar baru</small></a>
-          </p>
-          <p class="mb-1">
-            <a href="forgot-password.html"><small>Lupa password</small></a>
-          </p>
+          <!-- form end -->
         </div>
       </div>
     </div>

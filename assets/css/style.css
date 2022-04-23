@@ -1,5 +1,5 @@
 .login-page {
-	background-image: url("../images/accessoris/background2.jpg");
+	background-image: url("../images/accessoris/background.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -12,6 +12,18 @@
 	background-image: linear-gradient(to top right, #7d2ca9, #b381c9);
 }
 
-.hero-image .image {
-	border: 1px solid blue;
+.image .text-center .hero-image {
+	width: 350px;
+	margin: 70px;
+}
+
+.login-box-msg span,
+.col-5 h5,
+.justify-content-end small {
+	color: #7d2ca9;
+}
+
+.btn.sign {
+	background-color: #7d2ca9;
+	color: #fff;
 }
