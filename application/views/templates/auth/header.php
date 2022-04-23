@@ -13,5 +13,6 @@
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/')?>css/style.css">
 </head>
-<body class="hold-transition login-page bg-gradient-secondary">
+<body class="hold-transition login-page">

@@ -1,0 +1,17 @@
+.login-page {
+	background-image: url("../images/accessoris/background2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.card-body.login-card-body {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.col.image {
+	background-image: linear-gradient(to top right, #7d2ca9, #b381c9);
+}
+
+.hero-image .image {
+	border: 1px solid blue;
+}
