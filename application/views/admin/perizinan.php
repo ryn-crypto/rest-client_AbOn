@@ -17,24 +17,21 @@
     <section class="content">
       <div class="card m-3">
         <?= $this->session->flashdata('message'); ?>
-        <div class="card-header border-bottom border-info">
-          <h3 class="card-title ml-md-3">Semua transaksi</h3>
-        </div>
         <!-- /.card-header -->
         <div class="card-body">
           <div class="col-md-12">
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills row text-center">
-                    <li class="nav-item col-md-3"><a class="nav-link active" href="#masuk" data-toggle="tab">Pesanan Masuk</a></li>
-                    <li class="nav-item col-md-3"><a class="nav-link" href="#belum" data-toggle="tab">Pesanan Belum dibayar</a></li>
-                    <li class="nav-item col-md-3"><a class="nav-link" href="#proses" data-toggle="tab">Pesanan  Sedang Diproses</a></li>
-                    <li class="nav-item col-md-3"><a class="nav-link" href="#selesai" data-toggle="tab">Pesanan Selesai</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link active" href="#masuk" data-toggle="tab">Semua Surat Izin</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link" href="#belum" data-toggle="tab">Izin Cuti</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link" href="#proses" data-toggle="tab">Izin Sakit</a></li>
+                    <li class="nav-item col-md-3"><a class="nav-link" href="#selesai" data-toggle="tab">Lain-lain</a></li>
                   </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                   <div class="tab-content">
-                    <!-- pesnaan masuk -->
+                    <!-- semua surat izin -->
                     <div class="active tab-pane" id="masuk">
                       <div class="table-responsive">
                         <table class="table table-bordered m-0">

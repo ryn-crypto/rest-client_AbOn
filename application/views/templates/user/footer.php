@@ -31,7 +31,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-inline-block">
-      <strong>Copyright &copy; <?= date('Y'); ?> Game Center. </strong>
+      <strong>Copyright &copy; <?= date('Y'); ?> AbOn </strong>
       All rights reserved.
     </div>
   </footer>

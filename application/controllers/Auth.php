@@ -116,17 +116,16 @@ class Auth extends CI_Controller {
 					
 					if($user['role_id'] == 1){
 						redirect('admin');
-					} else if($user['role_id'] == 2) {
-						redirect('user');
 					} else {
-						redirect('home/joki');
+						redirect('user');
 					}
+
 				} else {
 					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
 					redirect('auth');
 				}
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun sedang dalam masa suspend!</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun anda tidak bisa dibuka, hubungi HRD</div>');
 				redirect('auth');
 			}
 		} else {

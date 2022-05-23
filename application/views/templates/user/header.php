@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="<?= base_url('assets/') ?>dist/css/adminlte.min.css">
   <!-- icon pada tab -->
   <link rel="shortcut icon" href="<?= base_url('assets/') ?>dist/img/throneLogo.png">
+  <!-- css pribadi -->
+  <link rel="stylesheet" href="<?= base_url('assets/')?>css/style.css">
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">

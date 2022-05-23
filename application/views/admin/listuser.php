@@ -14,171 +14,204 @@
     <!-- Main content -->
     
     <section class="content">
-
-    <div class="card card-solid">
-        <div class="card-body mt-3 mb-3">
-          <div class="row justify-content-md-center">
-            <div class="col-11">
-              <?= $this->session->flashdata('message') ?>
-            </div>
-          </div>
-          <div class="row border-bottom border-secondary">
-
-            <?php 
-            foreach($daftar as $l) :
-                if ($l['role_id'] == 1) :
-            ?>
-            <!-- Default box -->
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-              <div class="card bg-secondary d-flex flex-fill">
-                <div class="card-header text-white border-bottom-0">Admin</div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead text-dark font-weight-bolder"><b><?= $l['nama']; ?></b></h2>
-                      <p class="text-dark text-sm"><b>About: </b> <?= $l['tentang'] ?> </p>
-                      <ul class="ml-4 mb-0 fa-ul text-dark">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Alamat: <div><?= $l['tempat_tinggal'];?></div></li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> No Hp : <div><?= $l['no_hp'] ?></div></li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Bergabung sejak : <div><?= date('d F Y', $l['waktu_gabung']); ?></div></li>
-                      </ul>
-                    </div>
-                    <div class="col-4 text-center">
-                      <img src="<?= base_url('assets/images/profile/') . $l['gambar']; ?>" alt="user-avatar" class="img-circle img-fluid">
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right text-dark">
-                    <div class="dropdown mr-1">
-                      <button type="button" class="btn btn-primary text-muted dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-expanded="false" data-offset="5,10">
-                        Kelola
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                        <a class="dropdown-item" href="<?= base_url('admin/ubah/'. $l['id'])?>">Jadikan Worker</a>
+      <div class="card m-3">
+        <?= $this->session->flashdata('message'); ?>
+        <div class="card-header border-bottom border-info">
+          <h3 class="card-title ml-md-3">*data Karyawan berdasarkan divisi</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="col-md-12">
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills row text-center">
+                    <li class="nav-item col-md-4"><a class="nav-link active" href="#masuk" data-toggle="tab">Semua</a></li>
+                    <li class="nav-item col-md-2"><a class="nav-link" href="#belum" data-toggle="tab">HR/GA</a></li>
+                    <li class="nav-item col-md-2"><a class="nav-link" href="#proses" data-toggle="tab">Financial</a></li>
+                    <li class="nav-item col-md-2"><a class="nav-link" href="#selesai" data-toggle="tab">Operasional</a></li>
+                    <li class="nav-item col-md-2"><a class="nav-link" href="#selesai" data-toggle="tab">Outsourcing</a></li>
+                  </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <!-- pesnaan masuk -->
+                    <div class="active tab-pane" id="masuk">
+                      <div class="table-responsive">
+                        <table class="table table-bordered m-0">
+                          <thead>
+                            <tr class="text-center">
+                              <th scope="col" style="width: 10px">No</th>
+                              <th scope="col">No Pesanan</th>
+                              <th scope="col">Nama Game</th>
+                              <th scope="col">Tier</th>
+                              <th scope="col">Naik (bintang)</th>
+                              <th scope="col">Pemesan</th>
+                              <th scope="col" style="width: 150px">Tindakan</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php $no = 1;
+                            foreach ($raid as $r) : 
+                            if ($r['status'] == 2) :?>
+                            <tr>
+                              <th scope="row"><?= $no++; ?></th>
+                              <td><?= $r['no_pesanan']; ?></td>
+                              <td><?= $r['nama']; ?></td>
+                              <td><?= $r['tier']; ?></td>
+                              <td><?= $r['bintang_point']; ?></td>
+                              <td><?= strtok($r['pemesan'], '@');?></td>
+                              <td class="text-muted text-center">
+                                <a href="" class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">rincian</a>
+                              </td>
+                            </tr>
+                            <?php
+                            endif;
+                            endforeach;
+                            ?>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <!-- pesnaan masuk end-->
 
-            <?php endif;
-            endforeach;
-            ?>
-          </div>
-
-          <div class="row mt-3 border-bottom border-secondary">
-
-            <?php foreach($daftar as $l) :
-                if ($l['role_id'] == 2) :?>
-
-              <!-- Default box -->
-              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                <div class="card bg-secondary d-flex flex-fill">
-                  <div class="card-header text-light border-bottom-0">Worker</div>
-                  <div class="card-body pt-0">
-                    <div class="row">
-                      <div class="col-7">
-                        <h2 class="lead text-dark font-weight-bolder"><b><?= $l['nama']; ?></b></h2>
-                        <p class="text-dark text-sm"><b>About: </b> <?= $l['tentang'] ?> </p>
-                        <ul class="ml-4 mb-0 fa-ul text-dark">
-                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Alamat: <div><?= $l['tempat_tinggal'];?></div></li>
-                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> No Hp : <div><?= $l['no_hp'] ?></div></li>
-                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Bergabung sejak : <div><?= date('d F Y', $l['waktu_gabung']); ?></div></li>
-                        </ul>
-                      </div>
-                      <div class="col-4 text-center">
-                        <img src="<?= base_url('assets/images/profile/') . $l['gambar']; ?>" alt="user-avatar" class="img-circle img-fluid">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                    <?php if ($l['aktif'] == 0) : ?>
-                      <div class="col text-right text-dark">
-                        <p class="text-warning"> Sedang di suspend </p>
-                      </div>
-                    <div class="col text-right text-dark">
-                      <div class="dropdown mr-1">
-                        <button type="button" class="btn btn-primary text-muted dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-expanded="false" data-offset="5,10">
-                          Kelola
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                          <a class="dropdown-item" href="<?= base_url('admin/ubah/' . $l['id'])?>">Jadikan Admin</a>
-                          <a class="dropdown-item" href="<?= base_url('admin/suspend/' . $l['id'])?>">Buka Suspend</a>
+                    <!-- pesanan belum di bayar -->
+                    <div class="tab-pane" id="belum">
+                      <div class="active tab-pane" id="masuk">
+                        <div class="table-responsive">
+                          <table class="table table-bordered m-0">
+                            <thead>
+                              <tr class="text-center">
+                                <th scope="col" style="width: 10px">No</th>
+                                <th scope="col">No Pesanan</th>
+                                <th scope="col">Nama Game</th>
+                                <th scope="col">Tier</th>
+                                <th scope="col">Naik (bintang)</th>
+                                <th scope="col">Tgl Pesan</th>
+                                <th scope="col">Pemesan</th>
+                                <th scope="col" style="width: 190px">Tindakan</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php $no = 1;
+                              foreach ($raid as $r) : 
+                              if ($r['status'] == 1) :?>
+                              <tr>
+                                <th scope="row"><?= $no++; ?></th>
+                                <td><?= $r['no_pesanan']; ?></td>
+                                <td><?= $r['nama']; ?></td>
+                                <td><?= $r['tier']; ?></td>
+                                <td><?= $r['bintang_point']; ?></td>
+                                <td><?= date("d F Y", $r['waktu_order']);?></td>
+                                <td><?= strtok($r['pemesan'], '@');?></td>
+                                <td class="text-muted text-center">
+                                  <a href="" class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">hubungi</a>
+                                  |
+                                  <a href="<?= base_url('admin/hapus/'). $r['no_pesanan']; ?>" class="btn btn-outline-danger">Hapus</a>
+                                </td>
+                              </tr>
+                              <?php
+                              endif;
+                              endforeach;
+                              ?>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>
-                    <?php else :?>
-                      <div class="text-right text-dark">
-                        <div class="dropdown mr-1">
-                          <button type="button" class="btn btn-primary text-muted dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-expanded="false" data-offset="5,10">
-                            Kelola
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                            <a class="dropdown-item" href="<?= base_url('admin/ubah/' . $l['id'])?>">Jadikan Admin</a>
-                            <a class="dropdown-item" href="<?= base_url('admin/suspend/' . $l['id'])?>">Suspend</a>
-                          </div>
+                    <!-- pesanan belum di bayar end -->
+
+                    <!-- pesanan diproses -->
+                    <div class="tab-pane" id="proses">
+                      <div class="active tab-pane" id="masuk">
+                        <div class="table-responsive">
+                          <table class="table table-bordered m-0">
+                            <thead>
+                              <tr class="text-center">
+                                <th scope="col" style="width: 10px">No</th>
+                                <th scope="col">No Pesanan</th>
+                                <th scope="col">Nama Game</th>
+                                <th scope="col">Tier</th>
+                                <th scope="col">Naik (bintang)</th>
+                                <th scope="col">Pemesan</th>
+                                <th scope="col">Horseman</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php $no = 1;
+                              foreach ($raid as $r) : 
+                              if ($r['status'] == 3) :?>
+                              <tr>
+                                <th scope="row"><?= $no++; ?></th>
+                                <td><?= $r['no_pesanan']; ?></td>
+                                <td><?= $r['nama']; ?></td>
+                                <td><?= $r['tier']; ?></td>
+                                <td><?= $r['bintang_point']; ?></td>
+                                <td><?= strtok($r['pemesan'], '@');?></td>
+                                <td>
+                                  <?php
+                                  foreach ($horseman as $h) {
+                                    if ($r['id_horseman'] == $h['id']) {
+                                      echo($h['nama']);
+                                    }
+                                  } ?>
+                                </td>
+                              </tr>
+                              <?php
+                              endif;
+                              endforeach;
+                              ?>
+                            </tbody>
+                          </table>
                         </div>
-                      </div>
-                    <?php endif;?>
+                      </div>                      
+                    </div>
+                    <!-- pesanan selesai end -->
+
+                    <!-- pesanan selesai -->
+                    <div class="tab-pane" id="selesai">
+                      <div class="active tab-pane" id="masuk">
+                        <div class="table-responsive">
+                          <table class="table table-bordered m-0">
+                            <thead>
+                              <tr class="text-center">
+                                <th scope="col" style="width: 10px">No</th>
+                                <th scope="col">No Pesanan</th>
+                                <th scope="col">Nama Game</th>
+                                <th scope="col">Tier</th>
+                                <th scope="col">Naik (bintang)</th>
+                                <th scope="col">Pemesan</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php $no = 1;
+                              foreach ($raid as $r) : 
+                              if ($r['status'] == 4) :?>
+                              <tr>
+                                <th scope="row"><?= $no++; ?></th>
+                                <td><?= $r['no_pesanan']; ?></td>
+                                <td><?= $r['nama']; ?></td>
+                                <td><?= $r['tier']; ?></td>
+                                <td><?= $r['bintang_point']; ?></td>
+                                <td><?= strtok($r['pemesan'], '@');?></td>
+                              </tr>
+                              <?php
+                              endif;
+                              endforeach;
+                              ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>                      
+                    </div>
+                    <!-- pesanan selesai end -->
+                  
                   </div>
                 </div>
               </div>
-
-            <?php 
-            endif;
-            endforeach;?>
-
-          </div>
-          <div class="row mt-3">
-
-            <?php foreach($daftar as $l) :
-                if ($l['role_id'] == 3) :?>
-
-              <!-- Default box -->
-              <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-                <div class="card bg-secondary d-flex flex-fill">
-                  <div class="card-header text-light border-bottom-0">Customer</div>
-                  <div class="card-body pt-0">
-                    <div class="row">
-                      <div class="col-7">
-                        <h2 class="lead text-dark font-weight-bolder"><b><?= $l['nama']; ?></b></h2>
-                        <p class="text-dark text-sm"><b>About: </b> <?= $l['tentang'] ?> </p>
-                        <ul class="ml-4 mb-0 fa-ul text-dark">
-                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Alamat: <div><?= $l['tempat_tinggal'];?></div></li>
-                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> No Hp : <div><?= $l['no_hp'] ?></div></li>
-                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Bergabung sejak : <div><?= date('d F Y', $l['waktu_gabung']); ?></div></li>
-                        </ul>
-                      </div>
-                      <div class="col-4 text-center">
-                        <img src="<?= base_url('assets/images/profile/') . $l['gambar']; ?>" alt="user-avatar" class="img-circle img-fluid">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-footer">
-                  <div class="text-right text-dark">
-                    <div class="dropdown mr-1">
-                      <button type="button" class="btn btn-primary text-muted dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-expanded="false" data-offset="5,10">
-                        Kelola
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                        <a class="dropdown-item" href="<?= base_url('admin/ubah/' . $l['id'])?>">Jadikan Worker</a>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-
-            <?php 
-            endif;
-            endforeach;?>
-
+            </div>
           </div>
         </div>
       </div>
-
     </section>
 
     <!-- /.content -->

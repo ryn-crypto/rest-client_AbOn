@@ -59,9 +59,8 @@
           <div class="col-md-9">
             <div class="card">
               <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link" href="<?= base_url('user')?>">Ringkasan</a></li>
-                  <li class="nav-item"><a class="nav-link active" href="<?= base_url('user/edit')?>">Edit profile</a></li>
+                <ul class="nav nav-pills text-center">
+                  <li class="nav-item col-md"><a class="nav-link active" href="<?= base_url('user/edit')?>">Edit profile</a></li>
                 </ul>
               </div>
               

@@ -41,7 +41,7 @@
             <?= form_error('password', '<small class="text-danger pl-1">', '</small>') ?>
             <!-- end form login -->
             <p class="mt-4">
-              <a href="<?= base_url('auth/registrasi')?>" class="d-flex justify-content-end"><small>Forgot password ?</small></a>
+              <a href="" class="d-flex justify-content-end"><small>Forgot password ?</small></a>
             </p> 
             <div class="row d-flex justify-content-center">
               <div class="col-10">

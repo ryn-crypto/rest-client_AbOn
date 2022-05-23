@@ -32,7 +32,7 @@ class Admin extends CI_Controller
 
     public function list()
 	{
-        $data['title'] = 'Daftar User';
+        $data['title'] = 'Data Karyawan';
 
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
@@ -110,9 +110,9 @@ class Admin extends CI_Controller
         }
     }
 
-    public function pesanan()
+    public function perizinan()
 	{
-        $data['title'] = 'Pesanan';
+        $data['title'] = 'Perizinan';
 
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
@@ -135,7 +135,7 @@ class Admin extends CI_Controller
 		$this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);
         $this->load->view('templates/user/topbar', $data);
-        $this->load->view('admin/pesanan', $data);
+        $this->load->view('admin/perizinan', $data);
         $this->load->view('templates/user/footer');
 	}
 
