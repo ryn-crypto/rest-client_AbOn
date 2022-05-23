@@ -7,7 +7,7 @@ class daftar extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('user');
-        $this->db->order_by('role_id', 'ASC');
+        $this->db->order_by('departemen', 'ASC');
 		return $this->db->get()->result_array();
 	}
 

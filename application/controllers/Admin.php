@@ -43,7 +43,7 @@ class Admin extends CI_Controller
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
-        $data['daftar'] = $this->daftar->index();
+        $data['list'] = $this->daftar->index();
 
         $this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);

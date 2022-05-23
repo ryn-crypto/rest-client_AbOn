@@ -71,31 +71,26 @@
     $(this).next('.custom-file-label').addClass('selected').html(fileName);
   });
 
+  // untuk modal data karyawan
+  $('#rinci').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget); // Button that triggered the modal
+  var nama = button.data('nama'); // Extract info from data-* attributes
+  var nik = button.data('nik'); 
+  var jabatan = button.data('jabatan'); 
+  var departemen = button.data('departemen'); 
+  var email = button.data('email'); 
+  var alamat = button.data('alamat'); 
+  var foto = button.data('foto'); 
 
-  // <!-- data chart donut -->
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
-      labels: [
-          'Mobile Legend',
-          'Dota',
-      ],
-      datasets: [
-        {
-          data: [700,500],
-          backgroundColor : ['#f56954', '#00a65a'],
-        }
-      ]
-    }
-    var donutOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-
-    new Chart(donutChartCanvas, {
-      type: 'doughnut',
-      data: donutData,
-      options: donutOptions
-    })
+  var modal = $(this);
+  modal.find('.modal-body #nama').val(nama);
+  modal.find('.modal-body #nik').val(nik);
+  modal.find('.modal-body #jabatan').val(jabatan);
+  modal.find('.modal-body #departemen').val(departemen);
+  modal.find('.modal-body #email').val(email);
+  modal.find('.modal-body #alamat').val(alamat);
+  modal.find('.modal-body #foto').attr('src', 'http://localhost/Ab-On_Rest-Client/assets/images/profile/'+foto);
+})
 
 </script>
 

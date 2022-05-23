@@ -4,7 +4,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-dark">
+  <nav class="main-header navbar navbar-expand navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -24,7 +24,7 @@
                     <span class="d-block"><?= $user['nama']; ?></span>
                 </div>
             </div>
-            <div class="dropdown-menu dropdown-menu dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-right">
             <a href="<?= base_url('user') ?>" class="dropdown-item">
                 <h5 class="text-sm"><i class="fas fa-user pr-2"></i>Profile</h5>
             </a>

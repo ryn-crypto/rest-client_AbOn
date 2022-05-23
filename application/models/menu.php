@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+// tidak boleh dirubah-rubah
 class Menu extends CI_Model {
 
 	public function index($data)
