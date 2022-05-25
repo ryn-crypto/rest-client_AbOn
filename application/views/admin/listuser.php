@@ -54,7 +54,7 @@
                             <?php $no = 1;
                             foreach ($list as $r) :?>
                             <tr>
-                              <th scope="row"><?= $no++; ?></th>
+                              <td scope="row"><?= $no++; ?></td>
                               <td><?= $r['nik']; ?></td>
                               <td><?= $r['nama']; ?></td>
                               <td><?= $r['jabatan']; ?></td>
@@ -102,7 +102,7 @@
                               if ($r['departemen'] == 'HR/GA') :
                                 ?>
                               <tr>
-                                <th scope="row"><?= $no++; ?></th>
+                                <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
@@ -151,7 +151,7 @@
                               if ($r['departemen'] == 'Financial') :
                                 ?>
                               <tr>
-                                <th scope="row"><?= $no++; ?></th>
+                                <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
@@ -200,7 +200,7 @@
                               if ($r['departemen'] == 'Operation') :
                                 ?>
                               <tr>
-                                <th scope="row"><?= $no++; ?></th>
+                                <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
@@ -249,7 +249,7 @@
                               if ($r['departemen'] == 'Outsourcing') :
                                 ?>
                               <tr>
-                                <th scope="row"><?= $no++; ?></th>
+                                <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
@@ -298,42 +298,62 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nama :</label>
-                <input type="text" class="form-control" id="nama" readonly>
+            <form action="<?= base_url('Admin/list') ?>" method="post">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nama" class="col-form-label">Nama :</label>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nik" class="col-form-label">NIK :</label>
+                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Nomor Induk Karyawan">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="jabatan" class="col-form-label">Jabatan :</label>
+                    <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Nama Lengkap">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="departemen" class="col-form-label">departemen :</label>
+                    <input type="text" class="form-control" id="departemen" name="departemen">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="alamat">
+                    <label for="alamat" class="col-form-label">Alamat :</label>
+                    <input type="text" class="form-control" id="alamat" name="alamat">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="foto" class="col-form-label">Foto :</label>
+                    <div class="col">
+                      <img id='foto' src="" class="img-thumbnail">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="email" class="col-form-label">Email :</label>
+                    <input type="text" class="form-control" id="email" name="email" readonly>
+                  </div>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">NIK :</label>
-                <input type="text" class="form-control" id="nik" readonly>
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Jabatan :</label>
-                <input type="text" class="form-control" id="jabatan" readonly>
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">departemen :</label>
-                <input type="text" class="form-control" id="departemen" readonly>
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Email :</label>
-                <input type="text" class="form-control" id="email" readonly>
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Alamat :</label>
-                <input type="text" class="form-control" id="alamat" readonly>
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Foto :</label>
-                <div class="col-sm-3">
-                  <img id='foto' src="" class="img-thumbnail">
+              <div class="row justify-content-md-end">
+                <div class="col-md-2 col-sm-12 mb-2">
+                  <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Batal</button>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <button type="submit" class="btn btn-primary btn-block">Update data</button>
                 </div>
               </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send message</button>
           </div>
         </div>
       </div>

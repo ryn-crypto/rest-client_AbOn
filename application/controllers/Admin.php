@@ -37,19 +37,54 @@ class Admin extends CI_Controller
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
         $this->load->model('menu');
-        $this->load->model('daftar');
+        $this->load->model('user');
 
+        
         $data['user'] = $this->registrasi->ambil_data($email, 'user');
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
-        $data['list'] = $this->daftar->index();
+        $data['list'] = $this->user->index();
 
-        $this->load->view('templates/user/header', $data);
-        $this->load->view('templates/user/sidebar', $data);
-        $this->load->view('templates/user/topbar', $data);
-        $this->load->view('admin/listuser', $data);
-        $this->load->view('templates/user/footer');
+
+        // menentukan update atau tidak
+        if (!$this->input->post('nama')) {
+            $this->load->view('templates/user/header', $data);
+            $this->load->view('templates/user/sidebar', $data);
+            $this->load->view('templates/user/topbar', $data);
+            $this->load->view('admin/listuser', $data);
+            $this->load->view('templates/user/footer');    
+        } else {
+            $email_user = $this->input->post('email');
+            $hasil = $this->user->ambil_data($email_user);
+
+            if ($hasil != null) {
+                // persiapan data
+                $update = [
+                    'nama' => htmlspecialchars($this->input->post('nama', true)),
+                    'nik' => htmlspecialchars($this->input->post('nik', true)),
+                    'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
+                    'departemen' => htmlspecialchars($this->input->post('departemen', true)),
+                    'tempat_tinggal' => htmlspecialchars($this->input->post('alamat', true)),
+                ];
+
+                $id = $hasil['id'];
+                $this->user->update($update, $id);
+    
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data karyawan sudah diperbarui</div>');
+                redirect('admin/list');
+            } else {
+                $dataBaru = [
+                    'nama' => htmlspecialchars($this->input->post('nama', true)),
+                    'nik' => htmlspecialchars($this->input->post('nik', true)),
+                    'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
+                    'departemen' => htmlspecialchars($this->input->post('departemen', true)),
+                    'tempat_tinggal' => htmlspecialchars($this->input->post('alamat', true)),
+                    'email' => htmlspecialchars($this->input->post('email', true)),
+                ];
+            }            
+        }
+        
     }
 
     public function ubah()
