@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row">
           <div class="col-sm-6">
             <h1 class="m-0 mt-2"><?= $title ?></h1>
           </div><!-- /.col -->
@@ -15,7 +15,7 @@
     <!-- Main content -->
     
     <section class="content">
-      <div class="card m-3">
+      <div class="card m-3 mt-0">
         <div class="card-header border-bottom border-info">
           <div class="col-11">
             <?= $this->session->flashdata('message') ?>
@@ -24,8 +24,8 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body tableku">
-          <div class="table-responsive" id="tab">
-            <table class="table table-bordered m-0" id="table23">
+          <div class="table-responsive" id="table23">
+            <table class="table table-bordered m-0">
               <!-- tabel -->
               <thead>
                 <tr class="text-center">

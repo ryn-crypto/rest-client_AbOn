@@ -1,1 +1,48 @@
-/* PLACE YOU CUSTOM STYLES IN THIS FILE */
+/* #table23 {
+	width: 100%;
+}
+
+#table23 tbody {
+	height: 100px;
+	overflow-y: auto;
+	width: 100%;
+}
+
+#table23 thead,
+tbody,
+tr,
+td,
+th {
+	display: block;
+}
+
+#table23 tbody tr td {
+	float: left;
+}
+
+#table23 thead tr th {
+	float: left;
+} */
+
+.table-responsive {
+	overflow: auto;
+	height: 350px;
+}
+.table-responsive thead th {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+
+/* Just common table stuff. Really. */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+th,
+td {
+	padding: 8px 16px;
+}
+th {
+	background: #eee;
+}
