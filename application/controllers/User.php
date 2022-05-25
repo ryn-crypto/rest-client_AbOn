@@ -12,7 +12,7 @@ class User extends CI_Controller
 
 	public function index()
 	{
-        $data['title'] = 'Profile';
+        $data['title'] = 'Personal';
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
         $this->load->model('menu');
@@ -166,76 +166,37 @@ class User extends CI_Controller
         }
     }
 
-    public function pekerjaan()
+    public function absensi()
 	{
-        $data['title'] = 'Daftar Pekerjaan';
-
+        $data['title'] = 'Absensi';
         $email = ['email' =>  $this->session->userdata('email')];
+        
+        // load model
         $this->load->model('registrasi');
         $this->load->model('menu');
+        $this->load->model('absensi');
 
+        // query database
         $data['user'] = $this->registrasi->ambil_data($email, 'user');
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
-
-        // ambil data dari database
-        $this->load->model('raid');
-        $data['pesanan'] = $this->raid->pesanan();
+        // query absensi
+        $user_id = $data['user']['id'];
+        $data['absensi'] = $this->absensi->index($user_id);
 
 		$this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);
         $this->load->view('templates/user/topbar', $data);
-        $this->load->view('user/pekerjaan', $data);
+        $this->load->view('user/absensi', $data);
         $this->load->view('templates/user/footer');
 	}
 
-    public function take()
-	{
-        // data session
-        $email = ['email' =>  $this->session->userdata('email')];
-        $this->load->model('registrasi');
-        $data['user'] = $this->registrasi->ambil_data($email, 'user');
-
-        if (!$this->uri->segment(3)) {
-            redirect('user/pekerjaan');
-        } else {
-            $uri    = $this->uri->segment(3);
-
-            $cek = [
-                'id_horseman' => $data['user']['id'],
-                'status'    => 3
-            ];
-
-            // ambil data
-            $this->load->model('raid');
-            $pesanan = $this->raid->cek($cek);
-
-            // cek data
-            if (!$pesanan) {
-                $update  = [
-                    'id_horseman'   => $data['user']['id'],
-                    'status'        => 3 
-                ];
-    
-                $this->load->model('raid');
-                $this->raid->rider($update, $uri);
-
-                $this->session->set_flashdata('message', '<div class="alert alert-success mb-2" role="alert">Selesaikan pesanan sebelum waktu habis !!</div>');
-                redirect('user/raid');
-            } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-warning mb-2" role="alert">Kamu masih memiliki tugas raid yang belum selesai ! selesaikan raidmu untuk mengambil tugas baru !!</div>');
-                redirect('user/pekerjaan');
-            }
-        }   
-
-    }
-
-    public function raid()
+    public function wfh()
     {
 
         // data menu
-        $data['title'] = 'Sedang Raid';
+        $data['title'] = 'WFH/WFO';
     
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');

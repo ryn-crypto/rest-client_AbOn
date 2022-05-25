@@ -30,21 +30,21 @@
 
                     <?= form_open_multipart('user/ubahpassword');?>
                       <div class="form-group row">
-                        <label for="passwordawal" class="col-sm-2 col-form-label text-white-50">password Awal</label>
+                        <label for="passwordawal" class="col-sm-2 col-form-label text-dark-50">password Awal</label>
                         <div class="col-sm-6">
                           <input type="password" class="form-control" id="passwordawal" name="passwordawal">
                           <?= form_error('passwordawal', '<small class="text-warning pl-1">', '</small>') ?>
                         </div>
                       </div>
                       <div class="form-group row mt-3">
-                        <label for="passwordbaru" class="col-sm-2 col-form-label text-white-50">Password Baru</label>
+                        <label for="passwordbaru" class="col-sm-2 col-form-label text-dark-50">Password Baru</label>
                         <div class="col-sm-6">
                           <input type="password" class="form-control" id="passwordbaru" name="passwordbaru">
                           <?= form_error('passwordbaru', '<small class="text-warning pl-1">', '</small>') ?>
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="konfirmasi" class="col-sm-2 col-form-label text-white-50">Konfirmasi Password</label>
+                        <label for="konfirmasi" class="col-sm-2 col-form-label text-dark-50">Konfirmasi Password</label>
                         <div class="col-sm-6">
                           <input type="password" class="form-control" id="konfirmasi" name="konfirmasi">
                           <?= form_error('konfirmasi', '<small class="text-warning pl-1">', '</small>') ?>

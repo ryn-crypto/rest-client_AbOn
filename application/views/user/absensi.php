@@ -20,39 +20,52 @@
           <div class="col-11">
             <?= $this->session->flashdata('message') ?>
           </div>
-          <h2 class="card-title ml-2">Pesanan masuk</h2>
+          <h2 class="card-title ml-2">Data absensi</h2>
         </div>
         <!-- /.card-header -->
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered m-0">
+        <div class="card-body tableku">
+          <div class="table-responsive" id="tab">
+            <table class="table table-bordered m-0" id="table23">
+              <!-- tabel -->
               <thead>
                 <tr class="text-center">
-                  <th scope="col" style="width: 10px">No</th>
-                  <th scope="col">Nama Game</th>
-                  <th scope="col">Tier</th>
-                  <th scope="col">Naik (bintang)</th>
-                  <th scope="col">Pemesan</th>
-                  <th scope="col" style="width: 180px">Tindakan</th>
+                  <td scope="col" colspan="3">Nama :</td>
+                  <td scope="col" colspan="3"><?= $user['nama']; ?></td>
+                </tr>
+                <tr class="text-center">
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Waktu Masuk</th>
+                  <th>Waktu pulang</th>
+                  <th>Waktu Terlambat</th>
+                  <th>Denda <small>*Rp</small> </th>
                 </tr>
               </thead>
-              <tbody>
-                <?php $no = 1;
-                  foreach ($pesanan as $r) :?>
-                  <tr>
-                    <th scope="row"><?= $no++; ?></th>
-                    <td><?= $r['nama']; ?></td>
-                    <td><?= $r['tier']; ?></td>
-                    <td><?= $r['bintang_point']; ?></td>
-                    <td><?= strtok($r['pemesan'], '@');?></td>
-                    <td class="text-muted text-center">
-                      <a class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">Rincian</a>
-                      |
-                      <a href="<?= base_url('user/take/') .$r['no_pesanan'] ?>" class="btn btn-outline-warning">Raid</a>
-                    </td>
-                  </tr>
-                <?php endforeach; ?>
+              <tbody class="text-center">
+                <?php 
+                  $no = 1;
+                  foreach ($absensi as $a):
+                ?>
+                <tr>
+                  <?php 
+                    $tanggal = strtotime($a['tanggal']);
+                    $waktu_masuk = strtotime($a['waktu_masuk']);
+                    $waktu_pulang = strtotime($a['waktu_pulang']);
+                    $terlambat = strtotime($a['terlambat'])
+                  ?>
+                  <td><?= $no; ?></td>
+                  <td><?= date("d/m/Y", $tanggal); ?></td>
+                  <td><?= date("H:i", $waktu_masuk); ?></td>
+                  <td><?= date("H:i", $waktu_pulang); ?></td>
+                  <td><?= date("H:i", $terlambat); ?></td>
+                  <td><?= $a['denda']; ?></td>
+                </tr>
+                <?php 
+                  $no++;
+                  endforeach;
+                ?>
               </tbody>
+              <!-- tabel -->
             </table>
           </div>
         </div>
