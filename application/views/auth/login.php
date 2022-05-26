@@ -8,7 +8,7 @@
       <!-- row -->
       <div class="row">
         <!-- untuk logo -->
-        <div class="col image rounded-left">
+        <div class="col image rounded-left d-none d-lg-block">
           <div class="text-center">
             <img src="<?= base_url('assets/images/accessoris/hero.png')?>" class="hero-image" alt="...">
           </div>
@@ -16,7 +16,7 @@
         <!-- logo end -->
 
         <!-- untuk login -->
-        <div class="col-5 p-5">
+        <div class="col-lg-5 p-5">
           <h5 class="">Hallo !</h5>
           <h5 class="font-weight-bold mb-5">Good Morning</h5>
           <h6 class="login-box-msg font-weight-bold"><span>Login</span> Your account</h6>
