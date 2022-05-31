@@ -46,7 +46,6 @@ class Admin extends CI_Controller
         $data['sub_menu'] = $this->menu->sub_menu();
         $data['list'] = $this->user->index();
 
-
         // menentukan update atau tidak
         if (!$this->input->post('nama')) {
             $this->load->view('templates/user/header', $data);
@@ -63,8 +62,8 @@ class Admin extends CI_Controller
                 $update = [
                     'nama' => htmlspecialchars($this->input->post('nama', true)),
                     'nik' => htmlspecialchars($this->input->post('nik', true)),
-                    'jabatan' => htmlspecialchars($this->input->post('jabatan', true)),
-                    'departemen' => htmlspecialchars($this->input->post('departemen', true)),
+                    'jabatan_id' => htmlspecialchars($this->input->post('jabatan', true)),
+                    'divisi_id' => htmlspecialchars($this->input->post('divisi', true)),
                     'tempat_tinggal' => htmlspecialchars($this->input->post('alamat', true)),
                 ];
 

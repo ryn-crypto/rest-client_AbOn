@@ -16,9 +16,15 @@
     <section class="content">
       <div class="card m-3">
         <?= $this->session->flashdata('message'); ?>
-        <div class="card-header border-bottom border-info">
-          <h3 class="card-title ml-md-3">*data Karyawan berdasarkan divisi</h3>
-        </div>
+        <!-- <div class="row"> -->
+          <div class="card-header border-bottom border-info text-center text-lg-right">
+            <div class="col">
+              <h3 class="card-title ml-md-3">*data Karyawan berdasarkan divisi</h3>
+            </div>
+            <div class="col mr-md-3">
+              <button type="button" class="mt-2 btn btn-info btn-sm" data-toggle="modal" data-target="#tambah">Tambah data karyawan</button>
+            </div>
+          </div>
         <!-- /.card-header -->
         <div class="card-body">
           <div class="col-md-12">
@@ -46,7 +52,7 @@
                               <th scope="col">NIK</th>
                               <th scope="col">Nama Karyawan</th>
                               <th scope="col">Jabatan</th>
-                              <th scope="col">Departemen</th>
+                              <th scope="col">Divisi</th>
                               <th scope="col" style="width: 150px">Tindakan</th>
                             </tr>
                           </thead>
@@ -58,13 +64,13 @@
                               <td><?= $r['nik']; ?></td>
                               <td><?= $r['nama']; ?></td>
                               <td><?= $r['jabatan']; ?></td>
-                              <td><?= $r['departemen']; ?></td>
+                              <td><?= $r['nama_divisi']; ?></td>
                               <td class="text-muted text-center">
                                 <?php if($user['role_id'] < $r['role_id']): ?>
                                   <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#rinci" data-nama="<?= $r['nama'] ?>"
                                   data-nik="<?= $r['nik'] ?>"
-                                  data-jabatan="<?= $r['jabatan'] ?>"
-                                  data-departemen="<?= $r['departemen'] ?>"
+                                  data-jabatan="<?= $r['jabatan_id'] ?>"
+                                  data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
                                   data-foto="<?= $r['gambar'] ?>"
@@ -91,7 +97,7 @@
                                 <th scope="col">NIK</th>
                                 <th scope="col">Nama Karyawan</th>
                                 <th scope="col">Jabatan</th>
-                                <th scope="col">Departemen</th>
+                                <th scope="col">Divisi</th>
                                 <th scope="col" style="width: 150px">Tindakan</th>
                               </tr>
                             </thead>
@@ -99,20 +105,20 @@
                             <?php 
                             $no = 1;
                             foreach ($list as $r) :
-                              if ($r['departemen'] == 'HR/GA') :
+                              if ($r['nama_divisi'] == 'HR/GA') :
                                 ?>
                               <tr>
                                 <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
-                                <td><?= $r['departemen']; ?></td>
+                                <td><?= $r['nama_divisi']; ?></td>
                                 <td class="text-muted text-center">
                                 <?php if($user['role_id'] < $r['role_id']): ?>
                                   <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#rinci" data-nama="<?= $r['nama'] ?>"
                                   data-nik="<?= $r['nik'] ?>"
-                                  data-jabatan="<?= $r['jabatan'] ?>"
-                                  data-departemen="<?= $r['departemen'] ?>"
+                                  data-jabatan="<?= $r['jabatan_id'] ?>"
+                                  data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
                                   data-foto="<?= $r['gambar'] ?>"
@@ -140,7 +146,7 @@
                                 <th scope="col">NIK</th>
                                 <th scope="col">Nama Karyawan</th>
                                 <th scope="col">Jabatan</th>
-                                <th scope="col">Departemen</th>
+                                <th scope="col">Divisi</th>
                                 <th scope="col" style="width: 150px">Tindakan</th>
                               </tr>
                             </thead>
@@ -148,20 +154,20 @@
                             <?php 
                             $no = 1;
                             foreach ($list as $r) :
-                              if ($r['departemen'] == 'Financial') :
+                              if ($r['nama_divisi'] == 'Financial') :
                                 ?>
                               <tr>
                                 <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
-                                <td><?= $r['departemen']; ?></td>
+                                <td><?= $r['nama_divisi']; ?></td>
                                 <td class="text-muted text-center">
                                 <?php if($user['role_id'] < $r['role_id']): ?>
                                   <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#rinci" data-nama="<?= $r['nama'] ?>"
                                   data-nik="<?= $r['nik'] ?>"
-                                  data-jabatan="<?= $r['jabatan'] ?>"
-                                  data-departemen="<?= $r['departemen'] ?>"
+                                  data-jabatan="<?= $r['jabatan_id'] ?>"
+                                  data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
                                   data-foto="<?= $r['gambar'] ?>"
@@ -189,7 +195,7 @@
                                 <th scope="col">NIK</th>
                                 <th scope="col">Nama Karyawan</th>
                                 <th scope="col">Jabatan</th>
-                                <th scope="col">Departemen</th>
+                                <th scope="col">Divisi</th>
                                 <th scope="col" style="width: 150px">Tindakan</th>
                               </tr>
                             </thead>
@@ -197,20 +203,20 @@
                             <?php 
                             $no = 1;
                             foreach ($list as $r) :
-                              if ($r['departemen'] == 'Operation') :
+                              if ($r['nama_divisi'] == 'Operation') :
                                 ?>
                               <tr>
                                 <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
-                                <td><?= $r['departemen']; ?></td>
+                                <td><?= $r['nama_divisi']; ?></td>
                                 <td class="text-muted text-center">
                                 <?php if($user['role_id'] < $r['role_id']): ?>
                                   <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#rinci" data-nama="<?= $r['nama'] ?>"
                                   data-nik="<?= $r['nik'] ?>"
-                                  data-jabatan="<?= $r['jabatan'] ?>"
-                                  data-departemen="<?= $r['departemen'] ?>"
+                                  data-jabatan="<?= $r['jabatan_id'] ?>"
+                                  data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
                                   data-foto="<?= $r['gambar'] ?>"
@@ -238,7 +244,7 @@
                                 <th scope="col">NIK</th>
                                 <th scope="col">Nama Karyawan</th>
                                 <th scope="col">Jabatan</th>
-                                <th scope="col">Departemen</th>
+                                <th scope="col">Divisi</th>
                                 <th scope="col" style="width: 150px">Tindakan</th>
                               </tr>
                             </thead>
@@ -246,20 +252,20 @@
                             <?php 
                             $no = 1;
                             foreach ($list as $r) :
-                              if ($r['departemen'] == 'Outsourcing') :
+                              if ($r['nama_divisi'] == 'Outsource') :
                                 ?>
                               <tr>
                                 <td scope="row"><?= $no++; ?></td>
                                 <td><?= $r['nik']; ?></td>
                                 <td><?= $r['nama']; ?></td>
                                 <td><?= $r['jabatan']; ?></td>
-                                <td><?= $r['departemen']; ?></td>
+                                <td><?= $r['nama_divisi']; ?></td>
                                 <td class="text-muted text-center">
                                 <?php if($user['role_id'] < $r['role_id']): ?>
                                   <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#rinci" data-nama="<?= $r['nama'] ?>"
                                   data-nik="<?= $r['nik'] ?>"
-                                  data-jabatan="<?= $r['jabatan'] ?>"
-                                  data-departemen="<?= $r['departemen'] ?>"
+                                  data-jabatan="<?= $r['jabatan_id'] ?>"
+                                  data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
                                   data-foto="<?= $r['gambar'] ?>"
@@ -287,12 +293,12 @@
     </section>
     <!-- /.content -->
 
-    <!-- modal -->
-    <div class="modal fade" id="rinci" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- modals edit data -->
+    <div class="modal fade" id="rinci" tabindex="-1" role="dialog" aria-labelledby="rinci" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Rincian Data Karyawan</h5>
+            <h5 class="modal-title" id="rinci">Rincian Data Karyawan</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -314,20 +320,34 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="jabatan" class="col-form-label">Jabatan :</label>
-                    <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Nama Lengkap">
+                    <div class="form-group">
+                      <label for="nama_divisi" class="col-form-label">jabatan</label>
+                      <select class="form-control" id="jabatan" name="jabatan">
+                      <option value="01">Manager</option>
+                      <option value="02">Wakil Manager</option>
+                      <option value="03">Supervisor</option>
+                      <option value="04">Kepala Bagian</option>
+                      <option value="05">Karyawan</option>
+                      </select>
+                  </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="departemen" class="col-form-label">departemen :</label>
-                    <input type="text" class="form-control" id="departemen" name="departemen">
+                    <label for="nama_divisi" class="col-form-label">Divisi</label>
+                    <select class="form-control" id="nama_divisi" name="divisi">
+                      <option value="01">HR/GA</option>
+                      <option value="02">Financial</option>
+                      <option value="03">Operation</option>
+                      <option value="04">QUality Control</option>
+                      <option value="05">Outsource</option>
+                    </select>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 mb-sm-2">
                   <div class="alamat">
                     <label for="alamat" class="col-form-label">Alamat :</label>
-                    <input type="text" class="form-control" id="alamat" name="alamat">
+                    <textarea rows="8" type="text" class="form-control" id="alamat" name="alamat"></textarea>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -345,7 +365,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row justify-content-md-end">
+              <div class="row justify-content-md-end mt-2">
                 <div class="col-md-2 col-sm-12 mb-2">
                   <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Batal</button>
                 </div>
@@ -358,7 +378,73 @@
         </div>
       </div>
     </div>
-    <!-- /modal -->
+    <!-- /modals edit data  -->
+
+    <!-- modals tambah karyawan -->
+    <div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="tambah" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="tambah">Tambah data karyawan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="<?= base_url('Admin/list') ?>" method="post">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nama" class="col-form-label">Nama :</label>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Lengkap">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="email" class="col-form-label">Email :</label>
+                    <input type="text" class="form-control" id="email" name="email">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="jabatan" class="col-form-label">Jabatan :</label>
+                    <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Nama Lengkap">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="nama_divisi" class="col-form-label">nama_divisi</label>
+                    <select class="form-control" id="nama_divisi" name="divisi">
+                      <option value="" selected="selected" hidden="hidden">Pilih divisi</option>
+                      <option value="01">HR/GA</option>
+                      <option value="02">Financial</option>
+                      <option value="03">Operation</option>
+                      <option value="04">Quality Control</option>
+                      <option value="05">Outsource</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="alamat">
+                    <label for="alamat" class="col-form-label">Alamat :</label>
+                    <textarea rows="4" type="text" class="form-control" id="alamat" name="alamat"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-md-end mt-2">
+                <div class="col-md-2 col-sm-12 mb-2">
+                  <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Batal</button>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <button type="submit" class="btn btn-primary btn-block">Simpan data</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /modals tambah data karyawan -->
   </div>
   <!-- /.content-wrapper -->
 
