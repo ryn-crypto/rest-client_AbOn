@@ -16,6 +16,8 @@
     <section class="content">
       <div class="card m-3">
         <?= $this->session->flashdata('message'); ?>
+        <?= form_error('email', '<div class="alert alert-danger" role="alert" pl-5">', '</div>') ?>
+        <?= form_error('nama', '<div class="alert alert-danger" role="alert" pl-5">', '</div>') ?>
         <!-- <div class="row"> -->
           <div class="card-header border-bottom border-info text-center text-lg-right">
             <div class="col">
@@ -73,7 +75,7 @@
                                   data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
-                                  data-foto="<?= $r['gambar'] ?>"
+                                  data-foto="<?= base_url('assets/images/profile/').$r['gambar'] ?>"
                                   >rincian</button>
                                 <?php endif; ?>
                               </td>
@@ -121,7 +123,7 @@
                                   data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
-                                  data-foto="<?= $r['gambar'] ?>"
+                                  data-foto="<?= base_url('assets/images/profile/').$r['gambar'] ?>"
                                   >rincian</button>
                                 <?php endif; ?>
                               </td>
@@ -170,7 +172,7 @@
                                   data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
-                                  data-foto="<?= $r['gambar'] ?>"
+                                  data-foto="<?= base_url('assets/images/profile/').$r['gambar'] ?>"
                                   >rincian</button>
                                 <?php endif; ?>
                               </td>
@@ -219,7 +221,7 @@
                                   data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
-                                  data-foto="<?= $r['gambar'] ?>"
+                                  data-foto="<?= base_url('assets/images/profile/').$r['gambar'] ?>"
                                   >rincian</button>
                                 <?php endif; ?>
                               </td>
@@ -268,7 +270,7 @@
                                   data-nama_divisi="<?= $r['divisi_id'] ?>"
                                   data-alamat="<?= $r['tempat_tinggal'] ?>"
                                   data-email="<?= $r['email'] ?>"
-                                  data-foto="<?= $r['gambar'] ?>"
+                                  data-foto="<?= base_url('assets/images/profile/').$r['gambar'] ?>"
                                   >rincian</button>
                                 <?php endif; ?>
                                 </td>
@@ -315,7 +317,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="nik" class="col-form-label">NIK :</label>
-                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Nomor Induk Karyawan">
+                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Nomor Induk Karyawan" readonly>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -339,12 +341,12 @@
                       <option value="01">HR/GA</option>
                       <option value="02">Financial</option>
                       <option value="03">Operation</option>
-                      <option value="04">QUality Control</option>
+                      <option value="04">Quality Control</option>
                       <option value="05">Outsource</option>
                     </select>
                   </div>
                 </div>
-                <div class="col-md-6 mb-sm-2">
+                <div class="col-md-6">
                   <div class="alamat">
                     <label for="alamat" class="col-form-label">Alamat :</label>
                     <textarea rows="8" type="text" class="form-control" id="alamat" name="alamat"></textarea>
@@ -358,7 +360,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-md-3">
                   <div class="form-group">
                     <label for="email" class="col-form-label">Email :</label>
                     <input type="text" class="form-control" id="email" name="email" readonly>
@@ -385,7 +387,14 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="tambah">Tambah data karyawan</h5>
+            <div class="row">
+              <div class="col-12">
+                <h5 class="modal-title" id="tambah">Tambah data karyawan</h5>
+              </div>
+              <div class="col-12">
+                <small class="text-info">*defaault password untuk data baru adalah 12345</small>
+              </div>
+            </div>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -402,13 +411,20 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="email" class="col-form-label">Email :</label>
-                    <input type="text" class="form-control" id="email" name="email">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="jabatan" class="col-form-label">Jabatan :</label>
-                    <input type="text" class="form-control" id="jabatan" name="jabatan" placeholder="Nama Lengkap">
+                    <label for="nama_divisi" class="col-form-label">jabatan</label>
+                      <select class="form-control" id="jabatan" name="jabatan">
+                      <option value="" selected="selected" hidden="hidden">Pilih jabatan</option>
+                      <option value="01">Manager</option>
+                      <option value="02">Wakil Manager</option>
+                      <option value="03">Supervisor</option>
+                      <option value="04">Kepala Bagian</option>
+                      <option value="05">Karyawan</option>
+                      </select>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -424,7 +440,7 @@
                     </select>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md">
                   <div class="alamat">
                     <label for="alamat" class="col-form-label">Alamat :</label>
                     <textarea rows="4" type="text" class="form-control" id="alamat" name="alamat"></textarea>

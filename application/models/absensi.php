@@ -12,14 +12,22 @@ class Absensi extends CI_Model {
 		return $this->db->get()->result_array();
 	}
 
-	public function absenMasuk($tabel, $data){
-		$this->db->insert($tabel, $data);
+	// cek absensi
+	public function cek_absen($data){
+		$this->db->select('waktu_masuk');
+		$this->db->from('absensi');
+		$this->db->where($data);
+		return $this->db->get()->result_array();
 	}
 
-	public function absenPulang($tabel, $data){
-		$this->db->set('waktu_pulang', $data);
-        $this->db->where('id');
-		$this->db->update('user');
+	public function absenMasuk($data){
+		$this->db->insert('absensi', $data);
+	}
+
+	public function absenPulang($id, $data){
+		$this->db->set($data);
+        $this->db->where($id);
+		$this->db->update('absensi');
 	}
 
 }

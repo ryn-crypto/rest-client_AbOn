@@ -9,7 +9,7 @@ class User extends CI_Model {
 		$this->db->from('user');
 		$this->db->join('jabatan','jabatan.kode_jabatan = user.jabatan_id');
 		$this->db->join('divisi','divisi.kode_divisi = user.divisi_id');
-        $this->db->order_by('user.divisi_id', 'ASC');
+        $this->db->order_by('user.nik', 'ASC');
 		return $this->db->get()->result_array();
 	}
 
@@ -25,6 +25,14 @@ class User extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('user');
 		$this->db->where('email', $email);
+		return $this->db->get()->row_array();
+	}
+
+	public function no_terahir()
+	{
+		$this->db->select('id');
+		$this->db->from('user');
+		$this->db->order_by('id', 'DESC');
 		return $this->db->get()->row_array();
 	}
 }

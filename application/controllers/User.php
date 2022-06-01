@@ -168,6 +168,9 @@ class User extends CI_Controller
 
     public function absensi()
 	{
+        // set timezone indonesia
+        date_default_timezone_set("Asia/Jakarta");
+
         $data['title'] = 'Absensi';
         $email = ['email' =>  $this->session->userdata('email')];
         
@@ -194,6 +197,8 @@ class User extends CI_Controller
 
     public function wfh()
     {
+        // set timezone indonesia
+        date_default_timezone_set("Asia/Jakarta");
 
         // data menu
         $data['title'] = 'WFH/WFO';
@@ -207,21 +212,12 @@ class User extends CI_Controller
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
 
-        // menyiapkan data 
-
-        $game  = [
-            'id_horseman'   => $data['user']['id'],
-            'status'        => 3 
-        ];
-        $this->load->model('raid');
-        $data['game'] = $this->raid->live($game)['0'];
-
         // view -----
 
         $this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);
         $this->load->view('templates/user/topbar', $data);
-        $this->load->view('user/raid', $data);
+        $this->load->view('user/wfh', $data);
         $this->load->view('templates/user/footer');
     }
 }

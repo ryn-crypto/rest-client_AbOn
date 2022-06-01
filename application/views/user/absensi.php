@@ -48,16 +48,16 @@
                 ?>
                 <tr>
                   <?php 
-                    $tanggal = strtotime($a['tanggal']);
-                    $waktu_masuk = strtotime($a['waktu_masuk']);
-                    $waktu_pulang = strtotime($a['waktu_pulang']);
-                    $terlambat = strtotime($a['terlambat'])
+                    // $tanggal = $a['tanggal']);
+                    // $waktu_masuk = strtotime($a['waktu_masuk']);
+                    // $waktu_pulang = strtotime($a['waktu_pulang']);
+                    // $terlambat = strtotime($a['terlambat'])
                   ?>
                   <td><?= $no; ?></td>
-                  <td><?= date("d/m/Y", $tanggal); ?></td>
-                  <td><?= date("H:i", $waktu_masuk); ?></td>
-                  <td><?= date("H:i", $waktu_pulang); ?></td>
-                  <td><?= date("H:i", $terlambat); ?></td>
+                  <td><?= date("d/m/Y", $a['waktu_masuk']); ?></td>
+                  <td><?= date("H:i", $a['waktu_masuk']); ?></td>
+                  <td><?= date("H:i", $a['waktu_pulang']); ?></td>
+                  <td><?= $a['terlambat']; ?></td>
                   <td><?= $a['denda']; ?></td>
                 </tr>
                 <?php 
