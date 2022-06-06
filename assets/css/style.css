@@ -27,3 +27,7 @@
 	background-color: #7d2ca9;
 	color: #fff;
 }
+
+#load#loading {
+	height: 200px;
+}

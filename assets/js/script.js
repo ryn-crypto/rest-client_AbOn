@@ -15,8 +15,6 @@ $("#rinci").on("show.bs.modal", function (event) {
 	var alamat = button.data("alamat");
 	var foto = button.data("foto");
 
-	console.log(jabatan);
-
 	var modal = $(this);
 	modal.find(".modal-body #nama").val(nama);
 	modal.find(".modal-body #nik").val(nik);
@@ -29,8 +27,3 @@ $("#rinci").on("show.bs.modal", function (event) {
 	modal.find(".modal-body #alamat").val(alamat);
 	modal.find(".modal-body #foto").attr("src", foto);
 });
-
-// setInterval(auto_refresh(), 100000);
-// function auto_refresh() {
-// 	$("#qrcode").load("http://localhost/Ab-On_Rest-Client/admin/qr");
-// }

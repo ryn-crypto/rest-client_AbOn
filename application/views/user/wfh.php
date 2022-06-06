@@ -34,7 +34,7 @@
                   </div>
                 </div>
                 <div class="card-footer text-center">
-                  <a href="<?= base_url('Admin/qr/'). time(); ?>" class="btn btn-primary active" role="button" aria-pressed="true">Absen</a>
+                  <a href="<?= base_url('user/wfh/'). time(); ?>" class="btn btn-primary active" role="button" aria-pressed="true">Absen</a>
                 </div>
               </div>
               <div class="col-md-6 card">

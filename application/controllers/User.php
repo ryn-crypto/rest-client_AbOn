@@ -206,18 +206,58 @@ class User extends CI_Controller
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
         $this->load->model('menu');
+        $this->load->model('absensi');
     
         $data['user'] = $this->registrasi->ambil_data($email, 'user');
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
+        
+        // cek apakah ada yang mau absensi
+        $time = $this->uri->segment(3);        
+            
+        if (!$this->uri->segment(3)) {
+            // jika tidak ada waktu yang dikirim
+            $this->load->view('templates/user/header', $data);
+            $this->load->view('templates/user/sidebar', $data);
+            $this->load->view('templates/user/topbar', $data);
+            $this->load->view('user/wfh', $data);
+            $this->load->view('templates/user/footer');
+        } else {
+            // set timezone indonesia
+            date_default_timezone_set("Asia/Jakarta");
 
-        // view -----
+            // persiapan data
+            $absen = [
+                'user_id' => $data['user']['id'],
+                'tanggal' => date('d', $time)
+            ];
+            // cek apakah absen masuk atau pulang
+            if (!$this->absensi->cek_absen($absen)) {
+                // jika absen masuk 
+                $absen = [
+                    'user_id' =>  $data['user']['id'],
+                    'tanggal' => date('d', $time),
+                    'waktu_masuk' => $time,
+                ];
 
-        $this->load->view('templates/user/header', $data);
-        $this->load->view('templates/user/sidebar', $data);
-        $this->load->view('templates/user/topbar', $data);
-        $this->load->view('user/wfh', $data);
-        $this->load->view('templates/user/footer');
+                $this->absensi->absenMasuk($absen);
+                    
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda sudah absen masuk</div>');
+                redirect('user/wfh');
+            } else {
+                // jika absen pulang
+                $absenPulang = [
+                    'user_id' =>  $data['user']['id'],
+                    'tanggal' => date('d', $time),
+                    'waktu_pulang' => $time
+                ];
+
+                $this->absensi->absenPulang($absen, $absenPulang);
+                    
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda sudah absen pulang</div>');
+                redirect('user/wfh');
+            }
+        }
     }
 }
