@@ -4,7 +4,7 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 mt-2"><?= $title ?></h1>
           </div><!-- /.col -->
@@ -17,7 +17,11 @@
     <section class="content">
       <div class="card m-3 mt-0">
         <div class="card-header border-bottom border-info">
-          <h2 class="card-title ml-2">Data absensi</h2>
+          <h2 class="card-title ml-2 mr-2">Jadwal bulan </h2>
+          <div class="input-append date" id="datepicker" data-date="02-2012" data-date-format="mm-yyyy">
+          <input  type="text" readonly="readonly" name="date" >    
+          <span class="add-on"><i class="icon-th"></i></span>      
+          </div> 
         </div>
         <!-- /.card-header -->
         <div class="card-body tableku">
@@ -26,36 +30,26 @@
               <!-- tabel -->
               <thead>
                 <tr class="text-center">
-                  <td scope="col" colspan="3">Nama :</td>
-                  <td scope="col" colspan="3"><?= $user['nama']; ?></td>
+                  <td scope="col" colspan="2">Nama :</td>
+                  <td scope="col" colspan="2"><?= $user['nama']; ?></td>
                 </tr>
                 <tr class="text-center">
                   <th>No</th>
                   <th>Tanggal</th>
                   <th>Waktu Masuk</th>
                   <th>Waktu pulang</th>
-                  <th>Waktu Terlambat</th>
-                  <th>Denda <small>*Rp</small> </th>
                 </tr>
               </thead>
               <tbody class="text-center">
                 <?php 
                   $no = 1;
-                  foreach ($absensi as $a):
+                  foreach ($jadwal as $a):
                 ?>
                 <tr>
-                  <?php 
-                    // $tanggal = $a['tanggal']);
-                    // $waktu_masuk = strtotime($a['waktu_masuk']);
-                    // $waktu_pulang = strtotime($a['waktu_pulang']);
-                    // $terlambat = strtotime($a['terlambat'])
-                  ?>
                   <td><?= $no; ?></td>
-                  <td><?= date("d/m/Y", $a['waktu_masuk']); ?></td>
-                  <td><?= date("H:i", $a['waktu_masuk']); ?></td>
-                  <td><?= date("H:i", $a['waktu_pulang']); ?></td>
-                  <td><?= $a['terlambat']; ?></td>
-                  <td><?= $a['denda']; ?></td>
+                  <td><?= $a['tanggal'] . '/' . $a['bulan'] . '/'. $a['tahun']; ?></td>
+                  <td><?= $a['jam_masuk'] ?></td>
+                  <td><?= $a['jam_pulang'] ?></td>
                 </tr>
                 <?php 
                   $no++;

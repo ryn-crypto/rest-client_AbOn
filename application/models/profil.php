@@ -17,4 +17,8 @@ class Profil extends CI_Model {
 		$this->db->update('user');
 	}
 
+	public function pengumuman()
+	{
+		return $this->db->get('announcement')->result_array();
+	}
 }

@@ -16,11 +16,13 @@ class User extends CI_Controller
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
         $this->load->model('menu');
+        $this->load->model('profil');
 
         $data['user'] = $this->registrasi->ambil_data($email, 'user');
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
+        $data['pengumuman'] = $this->profil->pengumuman();
         
         $this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);
@@ -102,6 +104,39 @@ class User extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success text-dark" role="alert">Profil sudah di update</div>');
 			redirect('user/edit');
         }
+    }
+
+    public function jadwal()
+	{
+        $data['title'] = 'Jadwal';
+        $email = ['email' =>  $this->session->userdata('email')];
+        $this->load->model('registrasi');
+        $this->load->model('menu');
+        $this->load->model('jadwal');
+
+        $data['user'] = $this->registrasi->ambil_data($email, 'user');
+        $data['role'] = $this->registrasi->join_data($email);
+        $data['menu'] = $this->menu->index($data['role']['role_id']);
+        $data['sub_menu'] = $this->menu->sub_menu();
+
+        // persiapan data
+        $periode = [
+            'bulan' => '06',
+            'tahun' => '2022',
+            'jadwal.nik' => $data['role']['nik']
+        ];
+
+        $data['jadwal'] = $this->jadwal->index($periode);
+
+        // var_dump($data['jadwal']);
+        // die;
+
+
+        $this->load->view('templates/user/header', $data);
+        $this->load->view('templates/user/sidebar', $data);
+        $this->load->view('templates/user/topbar', $data);
+        $this->load->view('user/jadwal', $data);
+        $this->load->view('templates/user/footer');
     }
 
     public function ubahpassword()
