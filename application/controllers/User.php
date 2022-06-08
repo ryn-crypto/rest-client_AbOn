@@ -120,17 +120,42 @@ class User extends CI_Controller
         $data['sub_menu'] = $this->menu->sub_menu();
 
         // persiapan data
-        $periode = [
-            'bulan' => '06',
-            'tahun' => '2022',
-            'jadwal.nik' => $data['role']['nik']
-        ];
+        $bulan = $this->input->post('bulan');
 
-        $data['jadwal'] = $this->jadwal->index($periode);
+        if (!$bulan) {
+            $bulan =  date('m');
 
-        // var_dump($data['jadwal']);
-        // die;
+            $periode = [
+                'bulan' => $bulan,
+                'tahun' => '2022',
+                'jadwal.nik' => $data['role']['nik']
+            ];
+            // persiapan data ke variabael
+            $data['jadwal'] = $this->jadwal->index($periode);
 
+        } else {
+            $bulan = $this->input->post('bulan');
+
+            $periode = [
+                'bulan' => $bulan,
+                'tahun' => '2022',
+                'jadwal.nik' => $data['role']['nik']
+            ];
+            // persiapan data ke variabael
+            $data['jadwal'] = $this->jadwal->index($periode);
+
+            if (!$data['jadwal']) {
+                $query = [
+                    'tanggal' => '-',
+                    'bulan' => $bulan,
+                    'tahun' => '2022',
+                    'jam_masuk' => '-',
+                    'jam_pulang' => '-'
+                ];
+
+                $data['jadwal'][0] = $query;
+            }
+        }
 
         $this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);

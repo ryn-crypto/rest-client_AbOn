@@ -17,11 +17,35 @@
     <section class="content">
       <div class="card m-3 mt-0">
         <div class="card-header border-bottom border-info">
-          <h2 class="card-title ml-2 mr-2">Jadwal bulan </h2>
-          <div class="input-append date" id="datepicker" data-date="02-2012" data-date-format="mm-yyyy">
-          <input  type="text" readonly="readonly" name="date" >    
-          <span class="add-on"><i class="icon-th"></i></span>      
-          </div> 
+          <div class="row d-flex justify-content-between">
+            <div class="col-md-2 d-flex align-items-center">
+              <h2 class="card-title ml-2">Jadwal bulan <span><?= $jadwal[0]['bulan'] . '/'. $jadwal[0]['tahun']; ?></span> </h2>
+            </div>
+            <form action="<?= base_url('user/jadwal') ?>" method="post" class="col-md-8">
+              <div class="d-flex align-items-center justify-content-end row">
+                <div class="col-md-4 input-group">
+                  <select class="custom-select" id="bulan" name="bulan">
+                    <option value="" selected="selected" hidden="hidden">Pilih bulan</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                </div>
+                <button type="submit" class="col-md-1 btn btn-info btn-block "><i class="fas fa-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- date picker -->     
+          <!-- date picker end -->
         </div>
         <!-- /.card-header -->
         <div class="card-body tableku">

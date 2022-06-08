@@ -30,7 +30,7 @@
 
                     <?= form_open_multipart('user/ubahpassword');?>
                       <div class="form-group row">
-                        <label for="passwordawal" class="col-sm-2 col-form-label text-dark-50">password Awal</label>
+                        <label for="passwordawal" class="col-sm-2 col-form-label text-dark-50">password Awal </label>
                         <div class="col-sm-6">
                           <input type="password" class="form-control" id="passwordawal" name="passwordawal">
                           <?= form_error('passwordawal', '<small class="text-warning pl-1">', '</small>') ?>
