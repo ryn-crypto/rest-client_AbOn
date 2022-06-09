@@ -105,7 +105,7 @@
 
                       <div class="card">
                         <div class="card-body">
-                          <h3 class="card-title mb-3 text-bold"><i class="fas fa-birthday-cake mr-2"></i>  Ulang tahun hari ini</h3>
+                          <h3 class="card-title mb-3 text-bold"><i class="fas fa-comments"></i>  Pesan Masuk</h3>
                           <ul class="list-group list-group-flush card-text">
                             <li class="list-group-item">Cras justo odio</li>
                             <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -159,10 +159,6 @@
                     </div>
                   </div>
                   <!-- end modals -->
-
-
-
-
 
                   <!-- surat izin -->
                   <div class="tab-pane" id="surat_izin">

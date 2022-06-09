@@ -34,7 +34,7 @@
                   <th>Tanggal</th>
                   <th>Waktu Masuk</th>
                   <th>Waktu pulang</th>
-                  <th>Waktu Terlambat</th>
+                  <th>Waktu Terlambat (*menit)</th>
                   <th>Denda <small>*Rp</small> </th>
                 </tr>
               </thead>
@@ -44,18 +44,21 @@
                   foreach ($absensi as $a):
                 ?>
                 <tr>
-                  <?php 
-                    // $tanggal = $a['tanggal']);
-                    // $waktu_masuk = strtotime($a['waktu_masuk']);
-                    // $waktu_pulang = strtotime($a['waktu_pulang']);
-                    // $terlambat = strtotime($a['terlambat'])
-                  ?>
-                  <td><?= $no; ?></td>
-                  <td><?= date("d/m/Y", $a['waktu_masuk']); ?></td>
-                  <td><?= date("H:i", $a['waktu_masuk']); ?></td>
-                  <td><?= date("H:i", $a['waktu_pulang']); ?></td>
-                  <td><?= $a['terlambat']; ?></td>
-                  <td><?= $a['denda']; ?></td>
+                  <?php if (date('H:i', $a['terlambat']) > 00):?>
+                      <td class="text-danger"><?= $no; ?></td>
+                      <td class="text-danger"><?= date("d/m/Y", $a['waktu_masuk']); ?></td>
+                      <td class="text-danger"><?= date("H:i", $a['waktu_masuk']); ?></td>
+                      <td class="text-danger"><?= date("H:i", $a['waktu_pulang']); ?></td>
+                      <td class="text-danger"><?= $a['terlambat']; ?></td>
+                      <td class="text-danger"><?= number_format($a['denda'],2,',','.'); ?></td>
+                  <?php else:?>
+                    <td><?= $no; ?></td>
+                    <td><?= date("d/m/Y", $a['waktu_masuk']); ?></td>
+                    <td><?= date("H:i", $a['waktu_masuk']); ?></td>
+                    <td><?= date("H:i", $a['waktu_pulang']); ?></td>
+                    <td><?= $a['terlambat']; ?></td>
+                    <td><?= number_format($a['denda'],2,',','.'); ?></td>
+                  <?php endif;?>
                 </tr>
                 <?php 
                   $no++;

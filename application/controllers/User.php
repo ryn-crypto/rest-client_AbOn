@@ -267,6 +267,7 @@ class User extends CI_Controller
         $this->load->model('registrasi');
         $this->load->model('menu');
         $this->load->model('absensi');
+        $this->load->model('jadwal');
     
         $data['user'] = $this->registrasi->ambil_data($email, 'user');
         $data['role'] = $this->registrasi->join_data($email);
@@ -287,25 +288,65 @@ class User extends CI_Controller
             // set timezone indonesia
             date_default_timezone_set("Asia/Jakarta");
 
+            // cek jadwal kerja
+            $query = [
+                'tanggal' => date('d'),  
+                'bulan' => date('m'),  
+                'tahun' => date('o'),
+                'jadwal.nik' => $data['role']['nik'] 
+            ];  
+
+            $jadwal = $this->jadwal->index($query)[0];
+            $waktu_masuk = strtotime($jadwal['tahun'].'-'.$jadwal['bulan'].'-'.$jadwal['tanggal'].' '.$jadwal['jam_masuk']);
+            
             // persiapan data
             $absen = [
                 'user_id' => $data['user']['id'],
                 'tanggal' => date('d', $time)
             ];
+            $waktu_sekarang = strtotime(date("Y-m-d H:i"));
+
             // cek apakah absen masuk atau pulang
             if (!$this->absensi->cek_absen($absen)) {
                 // jika absen masuk 
-                $absen = [
-                    'user_id' =>  $data['user']['id'],
-                    'tanggal' => date('d', $time),
-                    'waktu_masuk' => $time,
-                ];
-
-                $this->absensi->absenMasuk($absen);
+                
+                
+                if ($waktu_sekarang>$waktu_masuk) {
                     
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda sudah absen masuk</div>');
-                redirect('user/wfh');
+                    $terlambat_jam = (date('H', $waktu_sekarang) - date('H', $waktu_masuk));
+                    $terlambat_menit = ($terlambat_jam*60);
+                    $jmlterlambat = $terlambat_menit + (date('i', $waktu_sekarang));
+
+                    $denda = ($jmlterlambat/10)*5000;
+
+                    $absen = [
+                        'terlambat' => $jmlterlambat,
+                        'denda' => $denda,
+                        'user_id' =>  $data['user']['id'],
+                        'tanggal' => date('d', $time),
+                        'waktu_masuk' => $time,
+                    ];
+    
+                    $this->absensi->absenMasuk($absen);
+                        
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda sudah absen masuk</div>');
+                    redirect('user/wfh');
+                } else {
+                    $absen = [
+                        'user_id' =>  $data['user']['id'],
+                        'tanggal' => date('d', $time),
+                        'waktu_masuk' => $time,
+                    ];
+    
+                    $this->absensi->absenMasuk($absen);
+                        
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda sudah absen masuk</div>');
+                    redirect('user/wfh');
+                }
+
             } else {
+                
+
                 // jika absen pulang
                 $absenPulang = [
                     'user_id' =>  $data['user']['id'],
