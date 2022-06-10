@@ -40,7 +40,8 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src="<?= base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
+<script src="<?= base_url('assets/') ?>plugins/jquery/jquery.js"></script>
+<script src="<?= base_url('assets/') ?>plugins/jquery-ui/jquery-ui.js"></script>
 <!-- Bootstrap -->
 <script src="<?= base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
@@ -102,9 +103,13 @@
     modal.find(".keterangan").text(ket);
   });
 
-  // Data Picker Initialization
-  $('.datepicker').datepicker({
-    inline: true
+  $('#date_picker').datepicker({
+    // format: 'dd/mm/yyyy',
+    // startDate: '-3d',
+    // locale: 'id',
+    format: 'yyyy-mm-d',
+    autoclose: true,
+    minDate: '+1d'
   });
 </script>
 

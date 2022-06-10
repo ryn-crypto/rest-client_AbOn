@@ -132,6 +132,10 @@ class User extends CI_Controller
             ];
             // persiapan data ke variabael
             $data['jadwal'] = $this->jadwal->index($periode);
+            
+            if (!$data['jadwal']) {
+                $data['jadwal'][0] = $this->_jadwalPribadi($bulan);
+            }
 
         } else {
             $bulan = $this->input->post('bulan');
@@ -145,23 +149,28 @@ class User extends CI_Controller
             $data['jadwal'] = $this->jadwal->index($periode);
 
             if (!$data['jadwal']) {
-                $query = [
-                    'tanggal' => '-',
-                    'bulan' => $bulan,
-                    'tahun' => '2022',
-                    'jam_masuk' => '-',
-                    'jam_pulang' => '-'
-                ];
-
-                $data['jadwal'][0] = $query;
-            }
+                $data['jadwal'][0] = $this->_jadwalPribadi($bulan);
+            } 
         }
+
+        
 
         $this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);
         $this->load->view('templates/user/topbar', $data);
         $this->load->view('user/jadwal', $data);
         $this->load->view('templates/user/footer');
+    }
+
+    private function _jadwalPribadi($bulan)
+    {
+        return $query = [
+            'tanggal' => '-',
+            'bulan' => $bulan,
+            'tahun' => '2022',
+            'jam_masuk' => '-',
+            'jam_pulang' => '-'
+        ];
     }
 
     public function ubahpassword()

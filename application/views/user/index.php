@@ -107,21 +107,18 @@
                         <div class="card-body">
                           <h3 class="card-title mb-3 text-bold"><i class="fas fa-comments"></i>  Pesan Masuk</h3>
                           <ul class="list-group list-group-flush card-text">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
+                            <li class="list-group-item"></li>
                           </ul>
                         </div>
                       </div>
 
                       <div class="card">
                         <div class="card-body">
-                          <h3 class="card-title mb-3 text-bold"><i class="fas fa-birthday-cake mr-2"></i>  Ulang tahun hari ini</h3>
+                          <h3 class="card-title mb-3 text-bold"><i class="fas fa-feather-alt"></i>  Lain-lain</h3>
                           <ul class="list-group list-group-flush card-text">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
+                          <li class="list-group-item"></li>
                           </ul>
                         </div>
                       </div>
@@ -162,43 +159,139 @@
 
                   <!-- surat izin -->
                   <div class="tab-pane" id="surat_izin">
-                    <div class="table-responsive">
-                      <table class="table table-bordered m-0">
-                        <thead>
-                          <tr class="text-center">
-                            <th scope="col" style="width: 10px">No</th>
-                            <th scope="col">surat izin</th>
-                            <th scope="col">Nama Game</th>
-                            <th scope="col">Tier</th>
-                            <th scope="col">Naik (bintang)</th>
-                            <th scope="col">Pemesan</th>
-                            <th scope="col" style="width: 150px">Tindakan</th>
-                          </tr>
-                        </thead>
-                        <!-- <tbody>
-                          <?php $no = 1;
-                          foreach ($raid as $r) : 
-                          if ($r['status'] == 2) :?>
-                          <tr>
-                            <th scope="row"><?= $no++; ?></th>
-                            <td><?= $r['no_pesanan']; ?></td>
-                            <td><?= $r['nama']; ?></td>
-                            <td><?= $r['tier']; ?></td>
-                            <td><?= $r['bintang_point']; ?></td>
-                            <td><?= strtok($r['pemesan'], '@');?></td>
-                            <td class="text-muted text-center">
-                              <a href="" class="btn btn-outline-info" type="button" data-toggle="modal" data-target="#rincian">rincian</a>
-                            </td>
-                          </tr>
-                          <?php
-                          endif;
-                          endforeach;
-                          ?>
-                        </tbody> -->
-                      </table>
+                    <div class="row d-flex justify-content-around">
+                      <button type="button" class="btn btn-outline-secondary col-md-5 mb-2" data-toggle="modal" data-target="#cuti" data-nama="test"><i class="fas fa-plus mr-2"></i>Form Pengajuan Cuti</button>
+                      <button type="button" class="btn btn-outline-secondary col-md-5 mb-2 mb-md-3" data-toggle="modal" data-target="#cuti"><i class="fas fa-plus mr-2"></i>Form Izin</button>
+                    </div>
+                    <div class="row d-flex justify-content-around">
+                      <div class="col-md-6">
+                        <div class="card mb-3">
+                          <div class="text-white bg-info card-header">Pengajuan Form</div>
+                          <div class="card-body">
+                            <ul class="list-group list-group-flush card-text">
+                              disini nanti list nya
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card mb-3">
+                          <div class="text-white bg-success card-header">Riwayat Form</div>
+                          <div class="card-body">
+                            <ul class="list-group list-group-flush card-text">
+                              disini nanti list nya
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <!-- /surat izin -->
+
+                  <!-- modals cuti -->
+                  <div class="modal fade bd-example-modal-lg" id="cuti" tabindex="-1" role="dialog" aria-labelledby="cuti" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <div class="row">
+                            <div class="col-12">
+                              <h4 class="modal-title" id="cuti">Form Pengajuan Cuti</h4>
+                            </div>
+                            <div class="col-12">
+                              <small class="text-info">*pengajuan cuti maximal 4 hari sebelumnya</small>
+                            </div>
+                          </div>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="<?= base_url('User/index') ?>" method="post">
+                            <div class="form-group row d-flex justify-content-center">
+                              <label for="nama" class="col-sm-3 col-form-label">Nama Karyawan</label>
+                              <div class="col-1 d-none d-sm-block">
+                                <p>:</p>
+                              </div>
+                              <div class="col-sm-7">
+                                <input type="text" class="form-control" id="nama" readonly>
+                              </div>
+                            </div>
+                            <div class="form-group row d-flex justify-content-center">
+                              <label for="sisa_cuti" class="col-sm-3 col-form-label">Sisa cuti saat ini</label>
+                              <div class="col-1 d-none d-sm-block">
+                                <p>:</p>
+                              </div>
+                              <div class="col-sm-7">
+                                <input type="text" class="form-control" id="sisa_cuti" readonly>
+                              </div>
+                            </div>
+                            <div class="form-group row d-flex justify-content-center">
+                              <label for="jenis_cuti" class="col-sm-3 col-form-label">Jenis Cuti</label>
+                              <div class="col-1 d-none d-sm-block">
+                                <p>:</p>
+                              </div>
+                              <div class="col-sm-7">
+                                <select class="form-control" id="jenis_cuti" name="jabatan">
+                                  <option value="" selected="selected" hidden="hidden">Pilih jenis pengajuan</option>
+                                  <option value="01">Pengajuan Cuti Tahunan</option>
+                                  <option value="02">Pengajuan Cuti Khusus</option>
+                                  <option value="03">Pengajuan pencairan Cuti</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row d-flex justify-content-center">
+                              <div class="col-sm-7 offset-md-4">
+                                <select class="form-control" id="jenis_cuti" name="jabatan">
+                                  <option value="" selected="selected" hidden="hidden">Pilih jenis Cuti Khusus</option>
+                                  <option value="01">Menikah</option>
+                                  <option value="02">Pernikahan anak</option>
+                                  <option value="03">Anggota keluarga / Saudara Meninggal</option>
+                                  <option value="03">Khitan anak</option>
+                                  <option value="03">Istri Melahirkan</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row d-flex justify-content-center">
+                              <div class="col-md-6 d-flex justify-content-center">
+                                <div class="row">
+                                  <label for="sisa_cuti" class="col-sm-5 col-form-label">Tanggal cuti</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" class="form-control date-picker">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 d-flex justify-content-left">
+                                <div class="row">
+                                  <label for="sisa_cuti" class="col-sm-5 offset-md-1 col-form-label">Sampai dengan</label>
+                                  <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="date_picker" data-provide="datepicker-inline">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group row d-flex justify-content-center">
+                              <label for="sisa_cuti" class="col-sm-3 col-form-label">Alasan / Keterangan</label>
+                              <div class="col-1 d-none d-sm-block">
+                                <p>:</p>
+                              </div>
+                              <div class="col-sm-7">
+                                <input type="text" class="form-control" id="sisa_cuti">
+                              </div>
+                            </div>
+                            <div class="row justify-content-md-end mt-2">
+                              <div class="col-md-2 col-sm-12 mb-2">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Batal</button>
+                              </div>
+                              <div class="col-md-2 col-sm-12">
+                                <button type="submit" class="btn btn-primary btn-block">Simpan data</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end modals -->
                 </div>
                 <!-- /.tab-content -->
               </div><!-- /.card-body -->
