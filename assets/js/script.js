@@ -27,3 +27,31 @@ $("#rinci").on("show.bs.modal", function (event) {
 	modal.find(".modal-body #alamat").val(alamat);
 	modal.find(".modal-body #foto").attr("src", foto);
 });
+
+// pengumuman
+$("#pengumuman").on("show.bs.modal", function (event) {
+	var button = $(event.relatedTarget);
+	var title = button.data("title");
+	var tanggal = button.data("tanggal");
+	var ket = button.data("ket");
+
+	var modal = $(this);
+	modal.find(".modal-title").text(title);
+	modal.find(".tanggal").text(tanggal);
+	modal.find(".keterangan").text(ket);
+});
+
+// datepicker
+$(".date_picker").datepicker({
+	dateFormat: "dd-mm-yy",
+	changeMonth: true,
+	changeYear: true,
+	minDate: "+4d",
+	inline: true,
+});
+
+$(".datepicker").datepicker({
+	dateFormat: "mm-yyyy",
+	startView: "months",
+	minViewMode: "months",
+});

@@ -18,7 +18,7 @@ class User extends CI_Controller
         $this->load->model('menu');
         $this->load->model('profil');
 
-        $data['user'] = $this->registrasi->ambil_data($email, 'user');
+        $data['user'] = $this->registrasi->user($email);
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();

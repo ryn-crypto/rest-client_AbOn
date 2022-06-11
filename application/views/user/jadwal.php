@@ -24,21 +24,7 @@
             <form action="<?= base_url('user/jadwal') ?>" method="post" class="col-md-8">
               <div class="d-flex align-items-center justify-content-end row">
                 <div class="col-md-4 input-group">
-                  <select class="custom-select" id="bulan" name="bulan">
-                    <option value="" selected="selected" hidden="hidden">Pilih bulan</option>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                  </select>
+                  <input class="custom-select datepicker" id="bulan" name="bulan" placeholder="Pilih bulan"></input>
                 </div>
                 <button type="submit" class="col-md-1 btn btn-info btn-block "><i class="fas fa-search"></i></button>
               </div>

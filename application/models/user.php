@@ -5,7 +5,7 @@ class User extends CI_Model {
 
 	public function index()
 	{
-		$this->db->select('*');
+		$this->db->select();
 		$this->db->from('user');
 		$this->db->join('jabatan','jabatan.kode_jabatan = user.jabatan_id');
 		$this->db->join('divisi','divisi.kode_divisi = user.divisi_id');

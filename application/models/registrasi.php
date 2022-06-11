@@ -22,4 +22,14 @@ class Registrasi extends CI_Model {
 		return $this->db->get()->row_array();
 
 	}
+
+	public function user($data)
+	{
+		$this->db->select('*');
+		$this->db->from('user');
+		$this->db->join('jabatan','jabatan.kode_jabatan = user.jabatan_id');
+		$this->db->join('divisi','divisi.kode_divisi = user.divisi_id');
+		$this->db->where($data);
+		return $this->db->get()->row_array();
+	}
 }

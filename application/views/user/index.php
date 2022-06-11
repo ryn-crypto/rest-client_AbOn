@@ -23,8 +23,9 @@
                   <img class="profile-user-img img-fluid img-circle"
                        src="<?= base_url('assets/images/profile/') . $user['gambar']; ?>" alt="User profile picture">
                 </div>
-                <h3 class="profile-username text-center"><?= $user['nama']; ?></h3>
-                <p class="text-muted text-center"><?= $role['role']; ?></p>
+                <h2 class="profile-username text-center"><?= $user['nama']; ?></h2>
+                <h6 class="text-muted text-center"><?= $user['jabatan']; ?></h6>
+                <h6 class="text-muted text-center"><?= $user['nama_divisi']; ?></h6>
               </div>
               <!-- /.card-body -->
             </div>
@@ -233,9 +234,9 @@
                               <div class="col-sm-7">
                                 <select class="form-control" id="jenis_cuti" name="jabatan">
                                   <option value="" selected="selected" hidden="hidden">Pilih jenis pengajuan</option>
-                                  <option value="01">Pengajuan Cuti Tahunan</option>
-                                  <option value="02">Pengajuan Cuti Khusus</option>
-                                  <option value="03">Pengajuan pencairan Cuti</option>
+                                  <option value="tahunan">Pengajuan Cuti Tahunan</option>
+                                  <option value="khusus" id="khusus">Pengajuan Cuti Khusus</option>
+                                  <option value="pencairan">Pengajuan pencairan Cuti</option>
                                 </select>
                               </div>
                             </div>
@@ -254,17 +255,17 @@
                             <div class="form-group row d-flex justify-content-center">
                               <div class="col-md-6 d-flex justify-content-center">
                                 <div class="row">
-                                  <label for="sisa_cuti" class="col-sm-5 col-form-label">Tanggal cuti</label>
+                                  <label for="tanggal_mulai" class="col-sm-5 col-form-label">Tanggal cuti</label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control date-picker">
+                                    <input type="text" class="form-control date_picker" id="tanggal_mulai">
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-md-6 d-flex justify-content-left">
+                              <div class="col-md-6 d-flex justify-content-md-left justify-content-center">
                                 <div class="row">
-                                  <label for="sisa_cuti" class="col-sm-5 offset-md-1 col-form-label">Sampai dengan</label>
+                                  <label for="tanggal_selesai" class="col-sm-5 col-form-label ">Sampai dengan</label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="date_picker" data-provide="datepicker-inline">
+                                    <input type="text" class="form-control date_picker" id="tanggal_selesai">
                                   </div>
                                 </div>
                               </div>
