@@ -13,9 +13,13 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <div class="row justify-content-md-center">
+          <div class="col-12">
+            <?= $this->session->flashdata('message') ?>
+          </div>
+        </div>
         <div class="row">
           <div class="col-md-3">
-
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
@@ -161,7 +165,7 @@
                   <!-- surat izin -->
                   <div class="tab-pane" id="surat_izin">
                     <div class="row d-flex justify-content-around">
-                      <button type="button" class="btn btn-outline-secondary col-md-5 mb-2" data-toggle="modal" data-target="#cuti" data-nama="test"><i class="fas fa-plus mr-2"></i>Form Pengajuan Cuti</button>
+                      <button type="button" class="btn btn-outline-secondary col-md-5 mb-2" data-toggle="modal" data-target="#cuti" data-nama="<?= $user['nama'];?>" data-cuti="<?= $user['sisa_cuti'];?>"><i class="fas fa-plus mr-2"></i>Form Pengajuan Cuti</button>
                       <button type="button" class="btn btn-outline-secondary col-md-5 mb-2 mb-md-3" data-toggle="modal" data-target="#cuti"><i class="fas fa-plus mr-2"></i>Form Izin</button>
                     </div>
                     <div class="row d-flex justify-content-around">
@@ -207,14 +211,14 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <form action="<?= base_url('User/index') ?>" method="post">
+                          <form action="<?= base_url('User/index/cuti') ?>" method="post">
                             <div class="form-group row d-flex justify-content-center">
                               <label for="nama" class="col-sm-3 col-form-label">Nama Karyawan</label>
                               <div class="col-1 d-none d-sm-block">
                                 <p>:</p>
                               </div>
                               <div class="col-sm-7">
-                                <input type="text" class="form-control" id="nama" readonly>
+                                <input type="text" class="form-control" id="nama" name="nama" readonly>
                               </div>
                             </div>
                             <div class="form-group row d-flex justify-content-center">
@@ -223,7 +227,7 @@
                                 <p>:</p>
                               </div>
                               <div class="col-sm-7">
-                                <input type="text" class="form-control" id="sisa_cuti" readonly>
+                                <input type="text" class="form-control" id="sisa_cuti" name="sisa_cuti" readonly>
                               </div>
                             </div>
                             <div class="form-group row d-flex justify-content-center">
@@ -232,23 +236,29 @@
                                 <p>:</p>
                               </div>
                               <div class="col-sm-7">
-                                <select class="form-control" id="jenis_cuti" name="jabatan">
+                                <select class="form-control" id="jenis_cuti" name="jenis_cuti">
                                   <option value="" selected="selected" hidden="hidden">Pilih jenis pengajuan</option>
-                                  <option value="tahunan">Pengajuan Cuti Tahunan</option>
-                                  <option value="khusus" id="khusus">Pengajuan Cuti Khusus</option>
-                                  <option value="pencairan">Pengajuan pencairan Cuti</option>
+                                  <?php 
+                                  foreach( $perizinan as $p ):
+                                    if ($p['code'] == 'cuti'):
+                                  ?>
+                                    <option value="<?= $p['id']?>"><?= $p['jenis_cuti']; ?></option>
+                                  <?php 
+                                      endif;
+                                    endforeach;
+                                  ?>
                                 </select>
                               </div>
                             </div>
                             <div class="form-group row d-flex justify-content-center">
                               <div class="col-sm-7 offset-md-4">
-                                <select class="form-control" id="jenis_cuti" name="jabatan">
+                                <select class="form-control" id="cuti_khusus" name="cuti_khusus">
                                   <option value="" selected="selected" hidden="hidden">Pilih jenis Cuti Khusus</option>
-                                  <option value="01">Menikah</option>
-                                  <option value="02">Pernikahan anak</option>
-                                  <option value="03">Anggota keluarga / Saudara Meninggal</option>
-                                  <option value="03">Khitan anak</option>
-                                  <option value="03">Istri Melahirkan</option>
+                                  <option value="Menikah">Menikah</option>
+                                  <option value="Pernikahan anak">Pernikahan anak</option>
+                                  <option value="Anggota keluarga / Saudara Meninggal">Anggota keluarga / Saudara Meninggal</option>
+                                  <option value="Khitan anak">Khitan anak</option>
+                                  <option value="Istri Melahirkan">Istri Melahirkan</option>
                                 </select>
                               </div>
                             </div>
@@ -257,7 +267,7 @@
                                 <div class="row">
                                   <label for="tanggal_mulai" class="col-sm-5 col-form-label">Tanggal cuti</label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control date_picker" id="tanggal_mulai">
+                                    <input type="text" class="form-control date_picker" id="tanggal_mulai" name="tanggal_mulai">
                                   </div>
                                 </div>
                               </div>
@@ -265,18 +275,18 @@
                                 <div class="row">
                                   <label for="tanggal_selesai" class="col-sm-5 col-form-label ">Sampai dengan</label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control date_picker" id="tanggal_selesai">
+                                    <input type="text" class="form-control date_picker" id="tanggal_selesai" name="tanggal_selesai">
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <div class="form-group row d-flex justify-content-center">
-                              <label for="sisa_cuti" class="col-sm-3 col-form-label">Alasan / Keterangan</label>
+                              <label for="ket" class="col-sm-3 col-form-label">Alasan / Keterangan</label>
                               <div class="col-1 d-none d-sm-block">
                                 <p>:</p>
                               </div>
                               <div class="col-sm-7">
-                                <input type="text" class="form-control" id="sisa_cuti">
+                                <input type="text" class="form-control" id="ket" name="ket">
                               </div>
                             </div>
                             <div class="row justify-content-md-end mt-2">

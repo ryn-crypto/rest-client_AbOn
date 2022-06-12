@@ -17,12 +17,47 @@ class User extends CI_Controller
         $this->load->model('registrasi');
         $this->load->model('menu');
         $this->load->model('profil');
+        $this->load->model('perizinan');
 
         $data['user'] = $this->registrasi->user($email);
         $data['role'] = $this->registrasi->join_data($email);
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
         $data['pengumuman'] = $this->profil->pengumuman();
+        $data['perizinan'] = $this->perizinan->index();
+        
+        $segmented = !$this->uri->segment(3);
+        if (!$segmented) {
+
+            $mulai = $this->input->post('tanggal_mulai');
+            $tanggal_mulai = explode("-", $mulai);
+            $selesai = $this->input->post('tanggal_selesai');
+            $tanggal_selesai = explode("-", $selesai);
+            $jmlh_cuti = ($tanggal_selesai[0])-(($tanggal_mulai[0]) - 01);
+
+            $cuti = [
+                'id_user'           => $data['role']['id'],
+                'jenis_cuti'        => $this->input->post('jenis_cuti'),
+                'cuti_khusus'       => $this->input->post('cuti_khusus'),
+                'tanggal_mulai'     => $this->input->post('tanggal_mulai'),
+                'tanggal_selesai'   => $this->input->post('tanggal_selesai'),
+                'jml_cuti'          => $jmlh_cuti,
+                'ket'               => $this->input->post('ket')
+            ];
+            
+            $sisa_cuti = [
+                'sisa_cuti' => ($data['role']['sisa_cuti']) - $jmlh_cuti,
+            ];
+
+            // insert ke database
+            $this->perizinan->cuti($cuti);
+
+            // update sisa cuti
+            $this->perizinan->jmlcuti($sisa_cuti, $data['role']['id']);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-light" role="alert">Form cuti sudah disimpan, tunggu hingga disetujui !!</div>');
+			redirect('user');
+        }
         
         $this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);

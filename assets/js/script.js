@@ -55,3 +55,22 @@ $(".datepicker").datepicker({
 	startView: "months",
 	minViewMode: "months",
 });
+
+// cuti
+$("#cuti").on("show.bs.modal", function (event) {
+	var button = $(event.relatedTarget);
+	var nama = button.data("nama");
+	var cuti = button.data("cuti");
+
+	var modal = $(this);
+	modal.find("#nama").val(nama);
+	modal.find("#sisa_cuti").val(cuti);
+});
+
+// alert
+$(".alert").on("load", function () {
+	// $(".alert").hide();
+	console.log("aku ada disini dong");
+	// var elem = $(".alert");
+	// elem.parentNode.removeChild(elem);
+});

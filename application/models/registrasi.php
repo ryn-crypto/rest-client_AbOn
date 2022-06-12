@@ -16,11 +16,10 @@ class Registrasi extends CI_Model {
 	public function join_data($data)
 	{
 		$this->db->select('*');
-		$this->db->from('user');
-		$this->db->join('user_role','user.role_id = user_role.id');
+		$this->db->from('user_role');
+		$this->db->join('user','user_role.id = user.role_id');
 		$this->db->where($data);
 		return $this->db->get()->row_array();
-
 	}
 
 	public function user($data)
