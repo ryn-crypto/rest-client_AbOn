@@ -166,15 +166,28 @@
                   <div class="tab-pane" id="surat_izin">
                     <div class="row d-flex justify-content-around">
                       <button type="button" class="btn btn-outline-secondary col-md-5 mb-2" data-toggle="modal" data-target="#cuti" data-nama="<?= $user['nama'];?>" data-cuti="<?= $user['sisa_cuti'];?>"><i class="fas fa-plus mr-2"></i>Form Pengajuan Cuti</button>
-                      <button type="button" class="btn btn-outline-secondary col-md-5 mb-2 mb-md-3" data-toggle="modal" data-target="#cuti"><i class="fas fa-plus mr-2"></i>Form Izin</button>
+                      <button type="button" class="btn btn-outline-secondary col-md-5 mb-2 mb-md-3" data-toggle="modal" data-target="#izin" data-nama="<?= $user['nama'];?>"><i class="fas fa-plus mr-2"></i>Form Izin</button>
                     </div>
-                    <div class="row d-flex justify-content-around">
+
+                    <!-- list -->
+                    <div class="row d-flex justify-content-around mt-2">
                       <div class="col-md-6">
-                        <div class="card mb-3">
+                        <div class="card">
                           <div class="text-white bg-info card-header">Pengajuan Form</div>
                           <div class="card-body">
                             <ul class="list-group list-group-flush card-text">
-                              disini nanti list nya
+                              <?php 
+                                foreach ($data_cuti as $dc) : 
+                                  if ($dc['status'] == 'pending') :
+                              ?>
+                              <li class="list-group-item">
+                                <h5><?= $dc['jenis_cuti']; ?></h5>
+                                <p><?= $dc['cuti_khusus']; ?></p>
+                              </li>
+                              <?php 
+                                  endif;
+                                endforeach;
+                              ?>
                             </ul>
                           </div>
                         </div>
@@ -184,7 +197,18 @@
                           <div class="text-white bg-success card-header">Riwayat Form</div>
                           <div class="card-body">
                             <ul class="list-group list-group-flush card-text">
-                              disini nanti list nya
+                            <?php 
+                                foreach ($data_cuti as $dc) : 
+                                  if ($dc['status'] == 'acc') :
+                              ?>
+                              <li class="list-group-item">
+                                <h5><?= $dc['jenis_cuti']; ?></h5>
+                                <p><?= $dc['cuti_khusus']; ?></p>
+                              </li>
+                              <?php 
+                                  endif;
+                                endforeach;
+                              ?>
                             </ul>
                           </div>
                         </div>
@@ -303,6 +327,130 @@
                     </div>
                   </div>
                   <!-- end modals -->
+
+                  <!-- modals izin -->
+                  <div class="modal fade bd-example-modal-lg" id="izin" tabindex="-1" role="dialog" aria-labelledby="izin" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <div class="row">
+                            <div class="col-12">
+                              <h4 class="modal-title" id="izin">Form Izin</h4>
+                            </div>
+                          </div>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="<?= base_url('User/index/izin') ?>" method="post">
+                          
+                            <div class="form-group row d-flex justify-content-center border border border-dark">
+                              <label for="jenis_izin" class="col-sm-3 col-form-label">Pilih jenis izin</label>
+                              <div class="col-sm-8 row">
+                                <?php 
+                                  foreach( $perizinan as $p ):
+                                    if ($p['code'] == 'izin'):
+                                  ?>
+                                    <div div id="jenis_izin" class="col-md-6 d-flex align-items-center">
+                                      <input type="radio" class="col-md-1" aria-label="Radio button for following text input" id="<?= $p['jenis_cuti']; ?>" name="jenis" value="<?= $p['id']?>">
+                                      <label for="<?= $p['jenis_cuti']; ?>" class="col-sm-10 col-form-label font-weight-normal"><?= $p['jenis_cuti']; ?></label>
+                                    </div>
+                                <?php 
+                                    endif;
+                                  endforeach;
+                                ?>
+                                
+                              </div>
+                            </div>
+                            <div class="form-group row d-flex justify-content-center border border border-dark pl-md-3 pb-3">
+                              <!-- nama -->
+                              <div class="col-12 mt-md-2 row">
+                                <label for="nama" class="col-sm-4 col-form-label">Nama Karyawan</label>
+                                <div class="col-1 d-none d-sm-block">
+                                  <p>:</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" id="nama" name="nama" readonly>
+                                </div>
+                              </div>
+                              <!-- tanggal -->
+                              <div class="col-12 mt-md-2 row">
+                                <label for="tanggal" class="col-sm-4 col-form-label">Tanggal</label>
+                                <div class="col-1 d-none d-sm-block">
+                                  <p>:</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control date_picker2" id="tanggal" name="tanggal">
+                                </div>
+                              </div>
+                              <!-- jam berangkat -->
+                              <div class="col-12 mt-md-2 row">
+                                <label for="datang" class="col-sm-4 col-form-label">waktu berangkat / datang</label>
+                                <div class="col-1 d-none d-sm-block">
+                                  <p>:</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control waktu" id="datang" name="datang" placeholder="   : ">
+                                </div>
+                              </div>
+                              <!-- jakm pulang -->
+                              <div class="col-12 mt-md-2 row">
+                                <label for="kembali" class="col-sm-4 col-form-label">waktu kembali / pulang</label>
+                                <div class="col-1 d-none d-sm-block">
+                                  <p>:</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control waktu" id="kembali" name="pulang" placeholder="   : ">
+                                </div>
+                              </div>
+                              <!-- tujuan -->
+                              <div class="col-12 mt-md-2 row">
+                                <label for="berangkat" class="col-sm-4 col-form-label">Tujuan</label>
+                                <div class="col-1 d-none d-sm-block">
+                                  <p>:</p>
+                                </div>
+                                <div class="col-sm-7 row">
+                                  <div id="jenis_izin" class="col-md-4">
+                                    <input type="radio" class="col-md-1" aria-label="Radio button for following text input" id="dalam_kota" name="tujuan">
+                                    <label for="dalam_kota" class="col-sm-10 col-form-label font-weight-normal">Dalam kota</label>
+                                  </div>
+                                  <div id="jenis_izin" class="col-md-4">
+                                    <input type="radio" class="col-md-1" aria-label="Radio button for following text input" id="luar_kota" name="tujuan">
+                                    <label for="luar_kota" class="col-sm-10 col-form-label font-weight-normal">Luar kota</label>
+                                  </div>
+                                  <div id="jenis_izin" class="col-md-4">
+                                    <input type="radio" class="col-md-1" aria-label="Radio button for following text input" id="pribadi" name="tujuan">
+                                    <label for="pribadi" class="col-sm-10 col-form-label font-weight-normal">Pribadi</label>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- keterangan -->
+                              <div class="col-12 mt-md-2 row">
+                                <label for="ket" class="col-sm-4 col-form-label">Alasan / Keterangan</label>
+                                <div class="col-1 d-none d-sm-block">
+                                  <p>:</p>
+                                </div>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" id="ket" name="ket">
+                                </div>
+                              </div>
+                            </div>
+                            <!-- footer -->                 
+                            <div class="row justify-content-md-end mt-2">
+                              <div class="col-md-2 col-sm-12 mb-2">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Batal</button>
+                              </div>
+                              <div class="col-md-2 col-sm-12">
+                                <button type="submit" class="btn btn-primary btn-block">Simpan data</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- izin modals end -->
                 </div>
                 <!-- /.tab-content -->
               </div><!-- /.card-body -->

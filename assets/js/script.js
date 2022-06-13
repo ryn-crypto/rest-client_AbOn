@@ -41,22 +41,17 @@ $("#pengumuman").on("show.bs.modal", function (event) {
 	modal.find(".keterangan").text(ket);
 });
 
-// datepicker
+// datepicker cuti
 $(".date_picker").datepicker({
 	dateFormat: "dd-mm-yy",
 	changeMonth: true,
 	changeYear: true,
 	minDate: "+4d",
 	inline: true,
+	beforeShowDay: $.datepicker.noWeekends,
 });
 
-$(".datepicker").datepicker({
-	dateFormat: "mm-yyyy",
-	startView: "months",
-	minViewMode: "months",
-});
-
-// cuti
+// cuti modal
 $("#cuti").on("show.bs.modal", function (event) {
 	var button = $(event.relatedTarget);
 	var nama = button.data("nama");
@@ -65,12 +60,4 @@ $("#cuti").on("show.bs.modal", function (event) {
 	var modal = $(this);
 	modal.find("#nama").val(nama);
 	modal.find("#sisa_cuti").val(cuti);
-});
-
-// alert
-$(".alert").on("load", function () {
-	// $(".alert").hide();
-	console.log("aku ada disini dong");
-	// var elem = $(".alert");
-	// elem.parentNode.removeChild(elem);
 });

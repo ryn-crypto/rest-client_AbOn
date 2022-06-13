@@ -59,5 +59,34 @@
 <!-- script pribadi -->
 <script src="<?= base_url('assets/') ?>js/script.js"></script>
 
+<script>
+  // izin
+  $("#izin").on("show.bs.modal", function (event) {
+    var button = $(event.relatedTarget);
+    var nama = button.data("nama");
+    console.log(nama);
+
+    var modal = $(this);
+    modal.find("#nama").val(nama);
+  });
+
+  // $(".datepicker").datepicker({
+  //   dateFormat: "mm-yyyy",
+  //   startView: "months",
+  //   minViewMode: "months",
+  // });
+
+  // datepicker tanggal izin
+  $(".date_picker2").datepicker({
+    dateFormat: "dd-mm-yy",
+    changeMonth: true,
+    changeYear: true,
+    minDate: "0d",
+    inline: true,
+    beforeShowDay: $.datepicker.noWeekends,
+  });
+
+</script>
+
 </body>
 </html>
