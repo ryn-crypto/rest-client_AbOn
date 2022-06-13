@@ -144,13 +144,18 @@ class Admin extends CI_Controller
         $email = ['email' =>  $this->session->userdata('email')];
         $this->load->model('registrasi');
         $this->load->model('menu');
-        // $this->load->model('daftar');
+        $this->load->model('perizinan');
 
         $data['user']       = $this->registrasi->ambil_data($email, 'user');
         $data['role']       = $this->registrasi->join_data($email);
         $data['menu']       = $this->menu->index($data['role']['role_id']);
         $data['sub_menu']   = $this->menu->sub_menu();
+        $data['cuti']       = $this->perizinan->semua();
 
+        if ($this->uri->segment(3)) {
+            var_dump($this->input->post('tolak'));
+            die;
+        }
 
 		$this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);

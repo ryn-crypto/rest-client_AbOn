@@ -12,6 +12,16 @@ class Perizinan extends CI_Model {
         $this->db->order_by('cuti.id', 'ASC');
 		return $this->db->get()->result_array();
 	}
+	
+	public function semua()
+	{
+		$this->db->select('*');
+		$this->db->from('cuti');
+		$this->db->join('jenis_cuti','cuti.jenis_cuti = jenis_cuti.id');
+		$this->db->join('user','cuti.id_user = user.id');
+        $this->db->order_by('cuti.id', 'ASC');
+		return $this->db->get()->result_array();
+	}
 
 	public function jenis()
 	{

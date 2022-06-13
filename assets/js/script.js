@@ -61,3 +61,33 @@ $("#cuti").on("show.bs.modal", function (event) {
 	modal.find("#nama").val(nama);
 	modal.find("#sisa_cuti").val(cuti);
 });
+
+// kelola cuti
+$("#cuti2").on("show.bs.modal", function (event) {
+	var button = $(event.relatedTarget); // Button that triggered the modal
+	var nama = button.data("nama"); // Extract info from data-* attributes
+	var jenis = button.data("jenis");
+	var khusus = button.data("khusus");
+	var mulai = button.data("mulai");
+	var selesai = button.data("selesai");
+	var ket = button.data("ket");
+
+	console.log(nama);
+	console.log(jenis);
+	console.log(khusus);
+	console.log(mulai);
+	console.log(selesai);
+	console.log(ket);
+
+	var modal = $(this);
+	modal.find(".modal-body #nama").val(nama);
+	modal.find(".modal-body #nik").val(nik);
+	modal.find(".modal-body #jabatan").val(jabatan).attr("selected", true);
+	modal
+		.find(".modal-body #nama_divisi")
+		.val(nama_divisi)
+		.attr("selected", true);
+	modal.find(".modal-body #email").val(email);
+	modal.find(".modal-body #alamat").val(alamat);
+	modal.find(".modal-body #foto").attr("src", foto);
+});

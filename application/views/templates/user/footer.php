@@ -70,12 +70,6 @@
     modal.find("#nama").val(nama);
   });
 
-  // $(".datepicker").datepicker({
-  //   dateFormat: "mm-yyyy",
-  //   startView: "months",
-  //   minViewMode: "months",
-  // });
-
   // datepicker tanggal izin
   $(".date_picker2").datepicker({
     dateFormat: "dd-mm-yy",
@@ -86,6 +80,24 @@
     beforeShowDay: $.datepicker.noWeekends,
   });
 
+  // kelola cuti
+  $("#cuti2").on("show.bs.modal", function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var nama = button.data("nama"); // Extract info from data-* attributes
+    var jenis = button.data("jenis");
+    var khusus = button.data("khusus");
+    var mulai = button.data("mulai");
+    var selesai = button.data("selesai");
+    var ket = button.data("ket");
+
+    var modal = $(this);
+    modal.find(".modal-body #nama").val(nama);
+    modal.find(".modal-body #jenis_cuti").val(jenis);
+    modal.find(".modal-body #cuti_khusus").val(khusus);
+    modal.find(".modal-body #tanggal_mulai").val(mulai);
+    modal.find(".modal-body #tanggal_selesai").val(selesai);
+    modal.find(".modal-body #ket").val(ket);
+  });
 </script>
 
 </body>
