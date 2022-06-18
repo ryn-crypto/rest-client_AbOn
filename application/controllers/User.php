@@ -74,7 +74,9 @@ class User extends CI_Controller
                     'tanggal_selesai'   => $this->input->post('tanggal'),
                     'jml_cuti'          => '',
                     'ket'               => $this->input->post('ket'),
-                    'status'            => 'pending'
+                    'status'            => 'pending',
+                    'berangkat'         => $this->input->post('datang'),
+                    'pulang'               => $this->input->post('pulang'),
                 ];
 
                 // insert ke database

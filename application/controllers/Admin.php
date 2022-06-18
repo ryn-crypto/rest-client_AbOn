@@ -152,15 +152,27 @@ class Admin extends CI_Controller
         $data['sub_menu']   = $this->menu->sub_menu();
         $data['cuti']       = $this->perizinan->semua();
 
-        if ($this->uri->segment(3)) {
-            var_dump($this->input->post('tolak'));
-            die;
-        }
+        $izin = $this->uri->segment(3);
+        $id_cuti = $this->uri->segment(4);
+        
+        if ($izin == 'ACC') {
+            $data = ['status' => 'acc'];
+            $this->perizinan->status($data, $id_cuti);
 
-		$this->load->view('templates/user/header', $data);
-        $this->load->view('templates/user/sidebar', $data);
-        $this->load->view('templates/user/topbar', $data);
-        $this->load->view('admin/perizinan', $data);
-        $this->load->view('templates/user/footer');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Izin/ Cuti sudah diACC </div>');
+            redirect('admin/perizinan');
+        } elseif ($izin == 'Tolak') {
+            $data = ['status' => 'tolak'];
+            $this->perizinan->status($data, $id_cuti);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Izin/ Cuti ditolak</div>');
+            redirect('admin/perizinan');
+        } else {   
+            $this->load->view('templates/user/header', $data);
+            $this->load->view('templates/user/sidebar', $data);
+            $this->load->view('templates/user/topbar', $data);
+            $this->load->view('admin/perizinan', $data);
+            $this->load->view('templates/user/footer');
+        }
 	}
 }

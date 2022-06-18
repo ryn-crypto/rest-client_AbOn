@@ -170,7 +170,7 @@
                     </div>
 
                     <!-- list -->
-                    <div class="row d-flex justify-content-around mt-2">
+                    <div class="row d-flex justify-content-left mt-2">
                       <div class="col-md-6">
                         <div class="card">
                           <div class="text-white bg-info card-header">Pengajuan Form</div>
@@ -192,6 +192,28 @@
                           </div>
                         </div>
                       </div>
+                      <div class="col-md-6">
+                        <div class="card mb-3">
+                          <div class="text-white bg-danger card-header">Form Izin/Cuti ditolak</div>
+                          <div class="card-body">
+                            <ul class="list-group list-group-flush card-text">
+                            <?php 
+                                foreach ($data_cuti as $dc) : 
+                                  if ($dc['status'] == 'tolak') :
+                              ?>
+                              <li class="list-group-item">
+                                <h5><?= $dc['jenis_cuti']; ?></h5>
+                                <p><?= $dc['cuti_khusus']; ?></p>
+                              </li>
+                              <?php 
+                                  endif;
+                                endforeach;
+                              ?>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- izin/ cuti ditolak -->
                       <div class="col-md-6">
                         <div class="card mb-3">
                           <div class="text-white bg-success card-header">Riwayat Form</div>

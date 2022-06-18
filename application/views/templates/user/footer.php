@@ -81,7 +81,7 @@
   });
 
   // kelola cuti
-  $("#cuti2").on("show.bs.modal", function (event) {
+  $("#data_cuti").on("show.bs.modal", function (event) {
     var button = $(event.relatedTarget); // Button that triggered the modal
     var nama = button.data("nama"); // Extract info from data-* attributes
     var jenis = button.data("jenis");
@@ -96,6 +96,25 @@
     modal.find(".modal-body #cuti_khusus").val(khusus);
     modal.find(".modal-body #tanggal_mulai").val(mulai);
     modal.find(".modal-body #tanggal_selesai").val(selesai);
+    modal.find(".modal-body #ket").val(ket);
+  });
+  
+  // kelola izin
+  $("#data_izin").on("show.bs.modal", function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var jenis = button.data("jenis");
+    var nama = button.data("nama"); // Extract info from data-* attributes
+    var tanggal = button.data("tanggal");
+    var datang = button.data("berangkat");
+    var pulang = button.data("pulang");
+    var ket = button.data("ket");
+
+    var modal = $(this);
+    modal.find(".modal-body #jenis_izin").val(jenis);
+    modal.find(".modal-body #nama").val(nama);
+    modal.find(".modal-body #tanggal").val(tanggal);
+    modal.find(".modal-body #datang").val(datang);
+    modal.find(".modal-body #pulang").val(pulang);
     modal.find(".modal-body #ket").val(ket);
   });
 </script>
