@@ -79,6 +79,14 @@
     inline: true,
     beforeShowDay: $.datepicker.noWeekends,
   });
+  
+  // datepicker tanggal izin
+  $(".datepicker").datepicker({
+    dateFormat: "mm-yy",
+    changeMonth: true,
+    changeYear: true,
+    inline: true,
+  });
 
   // kelola cuti
   $("#data_cuti").on("show.bs.modal", function (event) {

@@ -57,7 +57,7 @@ class Qr extends CI_Controller
 	}
 
     public function qrcode() {
-        $code = base_url('qr/index'). time();
+        $code = "http://10.0.2.2/rest_api_Abon/public/jadwal";
 
         // kita ubah ke png
         qrcode::png(

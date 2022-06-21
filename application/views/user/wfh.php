@@ -39,7 +39,7 @@
               </div>
               <div class="col-md-6 card">
                 <div class="card-body">
-                  <h2 class="card-title text-bold mb-3">Work From Home / Work From Aniware</h2>
+                  <h2 class="card-title text-bold mb-3">Work From Home / Work From Anywhere</h2>
                   <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed a iste soluta atque. Asperiores corporis itaque placeat molestiae provident, earum perspiciatis libero, repellendus, ex dolorum rerum! Maiores sint adipisci quos?</p>
                   <p class="card-text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, velit possimus error veniam aliquam ipsum quod facere consectetur architecto! Accusantium ducimus saepe, reprehenderit laborum necessitatibus culpa fuga fugit dolorum dolore aliquam aspernatur, deleniti magnam explicabo deserunt distinctio quia optio iure sapiente temporibus quasi unde. Quis deleniti labore quibusdam rem doloremque?

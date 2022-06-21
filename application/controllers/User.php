@@ -184,9 +184,9 @@ class User extends CI_Controller
         $data['sub_menu'] = $this->menu->sub_menu();
 
         // persiapan data
-        $bulan = $this->input->post('bulan');
+        $input = $this->input->post('bulan');
 
-        if (!$bulan) {
+        if (!$input) {
             $bulan =  date('m');
 
             $periode = [
@@ -202,11 +202,13 @@ class User extends CI_Controller
             }
 
         } else {
-            $bulan = $this->input->post('bulan');
+            $input = $this->input->post('bulan');
+            $bulan = substr($input, 0, 2);
+            $tahun = substr($input, 3, 4);
 
             $periode = [
                 'bulan' => $bulan,
-                'tahun' => '2022',
+                'tahun' => $tahun,
                 'jadwal.nik' => $data['role']['nik']
             ];
             // persiapan data ke variabael

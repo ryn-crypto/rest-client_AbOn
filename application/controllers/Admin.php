@@ -23,6 +23,26 @@ class Admin extends CI_Controller
         $data['menu'] = $this->menu->index($data['role']['role_id']);
         $data['sub_menu'] = $this->menu->sub_menu();
 
+        // untuk salam dinamis
+        date_default_timezone_set("Asia/Jakarta");
+
+        //ambil jam dan menit
+        $jam = date('H:i');
+
+        //atur salam menggunakan IF
+        if ($jam > '05:30' && $jam < '10:00') {
+            $data['salam'] = 'Pagi';
+        } elseif ($jam >= '10:00' && $jam < '15:00') {
+            $data['salam'] = 'Siang';
+        } elseif ($jam < '18:00') {
+            $data['salam'] = 'Sore';
+        } else {
+            $data['salam'] = 'Malam';
+        }
+
+        // var_dump($data['role']);
+        // die;
+
         $this->load->view('templates/user/header', $data);
         $this->load->view('templates/user/sidebar', $data);
         $this->load->view('templates/user/topbar', $data);
