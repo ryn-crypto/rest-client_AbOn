@@ -29,5 +29,12 @@ class Absensi extends CI_Model {
         $this->db->where($id);
 		$this->db->update('absensi');
 	}
+	
+	public function rekap(){
+        $this->db->select('*');
+		$this->db->from('absensi');
+		$this->db->join('user','user.id = absensi.user_id');
+		return $this->db->get()->result_array();
+	}
 
 }

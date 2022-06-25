@@ -195,4 +195,29 @@ class Admin extends CI_Controller
             $this->load->view('templates/user/footer');
         }
 	}
+
+    public function rekap()
+	{
+        $data['title'] = 'Rekap Absensi';
+
+        $email = ['email' =>  $this->session->userdata('email')];
+        $this->load->model('registrasi');
+        $this->load->model('menu');
+        $this->load->model('perizinan');
+        $this->load->model('absensi');
+
+        $data['user']       = $this->registrasi->ambil_data($email, 'user');
+        $data['role']       = $this->registrasi->join_data($email);
+        $data['menu']       = $this->menu->index($data['role']['role_id']);
+        $data['sub_menu']   = $this->menu->sub_menu();
+        
+        // data rekap absensi
+        $data['rekap'] = $this->absensi->rekap();
+  
+        $this->load->view('templates/user/header', $data);
+        $this->load->view('templates/user/sidebar', $data);
+        $this->load->view('templates/user/topbar', $data);
+        $this->load->view('admin/rekap', $data);
+        $this->load->view('templates/user/footer');
+	}
 }
